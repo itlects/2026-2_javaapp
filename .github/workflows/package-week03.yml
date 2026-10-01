@@ -11,12 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create Week03 Eclipse project archive
-        run: |
-          cd Week03
-          zip -r ../Week03_EclipseProjects.zip .
-      - name: Upload Week03 archive
+      - name: Upload Week03 Eclipse projects
         uses: actions/upload-artifact@v4
         with:
           name: Week03_EclipseProjects
-          path: Week03_EclipseProjects.zip
+          path: Week03
