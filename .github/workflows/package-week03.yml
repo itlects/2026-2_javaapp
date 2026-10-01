@@ -16,3 +16,4 @@ jobs:
         with:
           name: Week03_EclipseProjects
           path: Week03
+          include-hidden-files: true
