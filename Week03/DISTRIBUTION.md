@@ -8,3 +8,4 @@ Contents:
 - Eclipse .project / .classpath / .settings metadata
 - Java source files
 - Single ZIP layout for direct Eclipse import
+- Hidden Eclipse metadata included in distribution archive
