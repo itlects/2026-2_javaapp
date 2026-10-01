@@ -7,3 +7,4 @@ Contents:
 - 3 practice projects
 - Eclipse .project / .classpath / .settings metadata
 - Java source files
+- Single ZIP layout for direct Eclipse import
