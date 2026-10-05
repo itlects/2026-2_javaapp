@@ -45,3 +45,19 @@ ActionEvent, ItemEvent, KeyEvent, FocusEvent, MouseEvent를 단계적으로 연�
 ## 핵심 관찰
 학생은 각 예제에서 UI 배치보다 **어떤 컴포넌트가 이벤트 소스인지, 어떤 이벤트가 발생하는지,
 어떤 Listener가 등록되며 Handler에서 무엇이 바뀌는지**를 설명할 수 있어야 합니다.
+
+
+## 이전 초안 프로젝트 안내
+Week03 폴더에는 초기 작성 단계의 프로젝트가 일부 남아 있을 수 있습니다.
+현재 강의 및 Google Drive 배포의 기준은 위에 명시한 **예제 4개 + 실습 3개**입니다.
+
+현재 배포에서 제외되는 초기 초안:
+- Week03_Example01_ButtonEvent
+- Week03_Example02_TextFieldEvent
+- Week03_Example03_LayoutCompare
+- Week03_Example04_LoginEvent
+- Week03_Practice01_Login
+- Week03_Practice02_SignUp
+- Week03_Practice03_Layout
+
+학생 배포 및 수업에서는 위 초기 초안 대신 Event Handling 프로젝트 7개를 사용합니다.
