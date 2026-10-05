@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Stage current Week03 event projects
         run: |
           mkdir -p dist
@@ -22,9 +23,53 @@ jobs:
           cp -R Week03/Week03_Practice02_SignUpEventUpgrade dist/
           cp -R Week03/Week03_Practice03_EventMonitor dist/
           cp Week03/README.md dist/
-      - name: Upload Week03 event projects
+
+      - name: Upload complete Week03 package
         uses: actions/upload-artifact@v4
         with:
           name: Week03_EventHandling_EclipseProjects
           path: dist
+          include-hidden-files: true
+
+      - name: Upload Example01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example01_ActionEvent
+          path: Week03/Week03_Example01_ActionEvent
+          include-hidden-files: true
+      - name: Upload Example02
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example02_ItemEvent
+          path: Week03/Week03_Example02_ItemEvent
+          include-hidden-files: true
+      - name: Upload Example03
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example03_KeyFocusEvent
+          path: Week03/Week03_Example03_KeyFocusEvent
+          include-hidden-files: true
+      - name: Upload Example04
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example04_MouseEvent
+          path: Week03/Week03_Example04_MouseEvent
+          include-hidden-files: true
+      - name: Upload Practice01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Practice01_LoginEventUpgrade
+          path: Week03/Week03_Practice01_LoginEventUpgrade
+          include-hidden-files: true
+      - name: Upload Practice02
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Practice02_SignUpEventUpgrade
+          path: Week03/Week03_Practice02_SignUpEventUpgrade
+          include-hidden-files: true
+      - name: Upload Practice03
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Practice03_EventMonitor
+          path: Week03/Week03_Practice03_EventMonitor
           include-hidden-files: true
