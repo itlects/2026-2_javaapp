@@ -1,0 +1,9 @@
+id,user_id,password,name,email,phone,department,grade
+1,hong,1234,홍길동,hong@example.com,010-1111-1111,컴퓨터소프트웨어과,2
+2,kim,1234,김학생,kim@example.com,010-2222-2222,컴퓨터소프트웨어과,2
+3,lee,1234,이학생,lee@example.com,010-3333-3333,컴퓨터소프트웨어과,1
+4,park,1234,박학생,park@example.com,010-4444-4444,AI소프트웨어과,2
+5,choi,1234,최학생,choi@example.com,010-5555-5555,AI소프트웨어과,1
+6,jung,1234,정학생,jung@example.com,010-6666-6666,컴퓨터소프트웨어과,2
+7,kang,1234,강학생,kang@example.com,010-7777-7777,컴퓨터소프트웨어과,1
+8,yoon,1234,윤학생,yoon@example.com,010-8888-8888,AI소프트웨어과,2
