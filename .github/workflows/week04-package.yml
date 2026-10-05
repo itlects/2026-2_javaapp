@@ -68,3 +68,35 @@ jobs:
           path: Week04/Week04_Workbook01_ProfileFileManager
           include-hidden-files: true
           if-no-files-found: error
+
+      - name: Example05
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example05_SwingComponents
+          path: Week04/Week04_Example05_SwingComponents
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example06
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example06_JTableBasic
+          path: Week04/Week04_Example06_JTableBasic
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Practice03
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Practice03_MemberManager
+          path: Week04/Week04_Practice03_MemberManager
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Workbook02
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Workbook02_MemberListManager
+          path: Week04/Week04_Workbook02_MemberListManager
+          include-hidden-files: true
+          if-no-files-found: error
