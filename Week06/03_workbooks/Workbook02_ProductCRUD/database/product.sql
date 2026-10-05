@@ -1,0 +1,1 @@
+USE javaapp; CREATE TABLE IF NOT EXISTS product(product_id VARCHAR(20) PRIMARY KEY,product_name VARCHAR(100) NOT NULL,price INT NOT NULL,stock INT NOT NULL); INSERT INTO product VALUES('P001','키보드',35000,20),('P002','마우스',22000,35),('P003','USB 허브',18000,15) ON DUPLICATE KEY UPDATE product_name=VALUES(product_name),price=VALUES(price),stock=VALUES(stock);
