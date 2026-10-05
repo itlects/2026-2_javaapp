@@ -1,0 +1,70 @@
+name: Week04 Eclipse ZIP Packages
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Week04/**'
+      - '.github/workflows/week04-package.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Example01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example01_TextFileRead
+          path: Week04/Week04_Example01_TextFileRead
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example02
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example02_TextFileWrite
+          path: Week04/Week04_Example02_TextFileWrite
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example03
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example03_BufferedCopy
+          path: Week04/Week04_Example03_BufferedCopy
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example04
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example04_GuiTextEditor
+          path: Week04/Week04_Example04_GuiTextEditor
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Practice01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Practice01_StudentMemo
+          path: Week04/Week04_Practice01_StudentMemo
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Practice02
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Practice02_SimpleLogViewer
+          path: Week04/Week04_Practice02_SimpleLogViewer
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Workbook01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Workbook01_ProfileFileManager
+          path: Week04/Week04_Workbook01_ProfileFileManager
+          include-hidden-files: true
+          if-no-files-found: error
