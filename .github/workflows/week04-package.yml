@@ -100,3 +100,5 @@ jobs:
           path: Week04/Week04_Workbook02_MemberListManager
           include-hidden-files: true
           if-no-files-found: error
+
+# extended Week04 packaging trigger
