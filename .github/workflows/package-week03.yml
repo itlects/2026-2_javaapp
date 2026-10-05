@@ -73,3 +73,10 @@ jobs:
           name: Week03_Practice03_EventMonitor
           path: Week03/Week03_Practice03_EventMonitor
           include-hidden-files: true
+      - name: Upload Workbook01
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Workbook01_CourseRegistrationEvent
+          path: Week03/Week03_Workbook01_CourseRegistrationEvent
+          include-hidden-files: true
+
