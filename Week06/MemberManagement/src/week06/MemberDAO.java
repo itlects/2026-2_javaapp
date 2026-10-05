@@ -1,8 +1,0 @@
-package week06;
-import java.sql.*; import java.util.*;
-public class MemberDAO {
- public List<Member> findAll() throws SQLException { List<Member> list=new ArrayList<>(); String sql="SELECT member_id,name,phone,email FROM member ORDER BY member_id"; try(Connection c=DBConnection.getConnection(); PreparedStatement ps=c.prepareStatement(sql); ResultSet rs=ps.executeQuery()){ while(rs.next()) list.add(new Member(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4))); } return list; }
- public int insert(Member m)throws SQLException{String sql="INSERT INTO member(member_id,name,phone,email) VALUES(?,?,?,?)";try(Connection c=DBConnection.getConnection();PreparedStatement ps=c.prepareStatement(sql)){ps.setString(1,m.memberId());ps.setString(2,m.name());ps.setString(3,m.phone());ps.setString(4,m.email());return ps.executeUpdate();}}
- public int update(Member m)throws SQLException{String sql="UPDATE member SET name=?,phone=?,email=? WHERE member_id=?";try(Connection c=DBConnection.getConnection();PreparedStatement ps=c.prepareStatement(sql)){ps.setString(1,m.name());ps.setString(2,m.phone());ps.setString(3,m.email());ps.setString(4,m.memberId());return ps.executeUpdate();}}
- public int delete(String id)throws SQLException{String sql="DELETE FROM member WHERE member_id=?";try(Connection c=DBConnection.getConnection();PreparedStatement ps=c.prepareStatement(sql)){ps.setString(1,id);return ps.executeUpdate();}}
-}

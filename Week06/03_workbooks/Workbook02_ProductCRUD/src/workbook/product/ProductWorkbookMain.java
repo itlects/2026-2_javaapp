@@ -1,1 +1,0 @@
-package workbook.product; public class ProductWorkbookMain { public static void main(String[] args)throws Exception{ProductDAO d=new ProductDAO();for(Product p:d.findAll())System.out.println(p);d.insert(new Product("P900","실습상품",15000,10));d.update(new Product("P900","수정상품",17000,7));d.delete("P900");System.out.println("상품 CRUD 완료");}}

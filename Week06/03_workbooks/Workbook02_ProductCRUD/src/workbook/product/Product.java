@@ -1,1 +1,0 @@
-package workbook.product; public record Product(String productId,String productName,int price,int stock){}

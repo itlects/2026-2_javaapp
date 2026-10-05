@@ -1,0 +1,11 @@
+product_id,product_name,category,price,stock,maker
+P001,무선마우스,주변기기,19000,35,LogiTech
+P002,기계식키보드,주변기기,69000,18,KeyPro
+P003,27인치모니터,모니터,249000,12,ViewMax
+P004,USB-C허브,주변기기,39000,24,HubWorks
+P005,노트북스탠드,액세서리,32000,20,DeskMate
+P006,웹캠,영상장비,59000,15,CamPlus
+P007,USB마이크,음향장비,89000,9,SoundLab
+P008,외장SSD1TB,저장장치,129000,14,FastDisk
+P009,블루투스스피커,음향장비,49000,22,SoundLab
+P010,노트북파우치,액세서리,25000,40,CarryOn

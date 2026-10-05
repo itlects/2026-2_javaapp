@@ -27,9 +27,6 @@ import javax.swing.table.DefaultTableModel;
 /**
  * 6주차 회원관리 GUI — 조회(SELECT) / 등록(INSERT) / 수정(UPDATE) / 삭제(DELETE)
  *
- * [실습 시작 프로젝트] 화면 구성, 입력 검증(readForm), 보조 메서드는 완성되어 있다.
- * TODO 실습 2 ~ 5 를 순서대로 완성한다.
- *
  * 데이터 흐름: 입력 필드 → readForm()으로 검증 → Member 객체 → MemberDAO → DB → loadMembers()로 JTable 갱신
  */
 public class MemberManagementFrame extends JFrame {
@@ -137,46 +134,87 @@ public class MemberManagementFrame extends JFrame {
 
     /** [조회] DB에서 다시 읽어 JTable을 새로 채운다 */
     private void loadMembers() {
-        // TODO 실습 2 : 회원 목록을 JTable에 출력
-        // ① members = dao.findAll();
-        // ② model.setRowCount(0);   ← 기존 행을 지우지 않으면 [조회]할 때마다 중복 표시된다
-        // ③ for (Member m : members) { model.addRow(new Object[] { m.id(), m.userId(), m.name(),
-        //        nvl(m.email()), nvl(m.phone()), nvl(m.department()),
-        //        m.grade() == null ? "" : m.grade() }); }
-        // ④ SQLException은 catch해서 showDbError(ex) 호출
-        // (findAll()은 이미 완성되어 있다)
+        try {
+            members = dao.findAll();
+            model.setRowCount(0); // 기존 행을 지우지 않으면 같은 회원이 중복 표시됨
+            for (Member m : members) {
+                model.addRow(new Object[] {
+                    m.id(), m.userId(), m.name(),
+                    nvl(m.email()), nvl(m.phone()), nvl(m.department()),
+                    m.grade() == null ? "" : m.grade()
+                });
+            }
+        } catch (SQLException ex) {
+            showDbError(ex);
+        }
     }
 
     /** [등록] */
     private void insertMember() {
-        // TODO 실습 3-2 : [등록] 버튼 처리 (먼저 MemberDAO.insert()를 완성)
-        // ① Member member = readForm();  → null이면 return (입력 오류 메시지는 readForm이 보여 줌)
-        // ② int count = dao.insert(member);
-        // ③ showInfo(count + "명의 회원이 등록되었습니다.");  loadMembers();  clearForm();
-        // ④ catch (SQLIntegrityConstraintViolationException ex) → 번호/아이디 중복 안내
-        //    catch (SQLException ex) → showDbError(ex)
-        showWarning("TODO 실습 3-2: insertMember()를 완성하세요.");
+        Member member = readForm();
+        if (member == null) {
+            return; // 입력 오류 → 이미 메시지를 보여 줌
+        }
+        try {
+            int count = dao.insert(member);
+            showInfo(count + "명의 회원이 등록되었습니다.");
+            loadMembers();
+            clearForm();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            showWarning("이미 사용 중인 번호 또는 아이디입니다.\n다른 값을 입력하세요.");
+        } catch (SQLException ex) {
+            showDbError(ex);
+        }
     }
 
     /** [수정] */
     private void updateMember() {
-        // TODO 실습 4-2 : [수정] 버튼 처리 (먼저 MemberDAO.update()를 완성)
-        // ① table.getSelectedRow() < 0 이면 "수정할 회원을 선택하세요" 안내 후 return
-        // ② Member member = readForm();  → null이면 return
-        // ③ int count = dao.update(member);  → 0이면 "해당 회원이 없습니다"
-        // ④ loadMembers();  clearForm();
-        showWarning("TODO 실습 4-2: updateMember()를 완성하세요.");
+        if (table.getSelectedRow() < 0) {
+            showWarning("수정할 회원을 목록에서 먼저 선택하세요.");
+            return;
+        }
+        Member member = readForm();
+        if (member == null) {
+            return;
+        }
+        try {
+            int count = dao.update(member);
+            if (count == 0) {
+                showWarning("번호 " + member.id() + " 회원이 없습니다. [조회]로 목록을 새로 고치세요.");
+            } else {
+                showInfo("회원 정보가 수정되었습니다.");
+            }
+            loadMembers();
+            clearForm();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            showWarning("이미 다른 회원이 사용 중인 아이디입니다.");
+        } catch (SQLException ex) {
+            showDbError(ex);
+        }
     }
 
     /** [삭제] 확인 대화상자에서 [예]를 선택한 경우에만 삭제 */
     private void deleteMember() {
-        // TODO 실습 5-2 : [삭제] 버튼 처리 (먼저 MemberDAO.delete()를 완성)
-        // ① int row = table.getSelectedRow();  선택이 없으면 안내 후 return
-        // ② Member target = members.get(row);
-        // ③ int answer = JOptionPane.showConfirmDialog(this, target.name() + " 회원을 삭제할까요?",
-        //        "삭제 확인", JOptionPane.YES_NO_OPTION);
-        // ④ answer == JOptionPane.YES_OPTION 일 때만 dao.delete(target.id()) → loadMembers(); clearForm();
-        showWarning("TODO 실습 5-2: deleteMember()를 완성하세요.");
+        int row = table.getSelectedRow();
+        if (row < 0) {
+            showWarning("삭제할 회원을 목록에서 먼저 선택하세요.");
+            return;
+        }
+        Member target = members.get(row);
+        int answer = JOptionPane.showConfirmDialog(this,
+                target.id() + "번 " + target.name() + "(" + target.userId() + ") 회원을 삭제할까요?",
+                "삭제 확인", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (answer != JOptionPane.YES_OPTION) {
+            return;
+        }
+        try {
+            int count = dao.delete(target.id());
+            showInfo(count + "명의 회원이 삭제되었습니다.");
+            loadMembers();
+            clearForm();
+        } catch (SQLException ex) {
+            showDbError(ex);
+        }
     }
 
     // =========================================================== 입력 필드 처리
