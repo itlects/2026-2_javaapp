@@ -20,19 +20,34 @@ public class ProfileFileManager extends JFrame {
         setTitle("학생 프로필 파일 관리");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel content = new JPanel(new BorderLayout(0, 12));
-        content.setBorder(BorderFactory.createEmptyBorder(18, 24, 16, 24));
+        /*
+         * 전체 창과 실제 입력 영역 사이에 충분한 좌우 여백을 둔다.
+         * 바깥 content는 화면 전체를 사용하고,
+         * mainPanel은 중앙에 배치하여 너무 좌우 끝까지 붙지 않도록 한다.
+         */
+        JPanel content = new JPanel(new GridBagLayout());
+        content.setBorder(BorderFactory.createEmptyBorder(20, 36, 18, 36));
         setContentPane(content);
+
+        JPanel mainPanel = new JPanel(new BorderLayout(0, 12));
+        mainPanel.setPreferredSize(new Dimension(540, 450));
+
+        GridBagConstraints outer = new GridBagConstraints();
+        outer.gridx = 0;
+        outer.gridy = 0;
+        outer.weightx = 1.0;
+        outer.weighty = 1.0;
+        outer.fill = GridBagConstraints.BOTH;
+        outer.anchor = GridBagConstraints.CENTER;
+        content.add(mainPanel, outer);
 
         // -------------------------------------------------
         // 1. 기본 정보 입력 영역
-        //    GridLayout 대신 GridBagLayout을 사용하여
-        //    라벨은 필요한 폭만 사용하고 입력 필드는 확장되도록 구성
         // -------------------------------------------------
         JPanel form = new JPanel(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(5, 4, 5, 4);
         gbc.anchor = GridBagConstraints.WEST;
 
         addFormRow(form, gbc, 0, "학번", idField);
@@ -49,7 +64,7 @@ public class ProfileFileManager extends JFrame {
         introArea.setWrapStyleWord(true);
 
         JScrollPane introScroll = new JScrollPane(introArea);
-        introScroll.setPreferredSize(new Dimension(520, 230));
+        introScroll.setPreferredSize(new Dimension(500, 235));
         introPanel.add(introScroll, BorderLayout.CENTER);
 
         // -------------------------------------------------
@@ -59,7 +74,8 @@ public class ProfileFileManager extends JFrame {
         JButton load = new JButton("불러오기");
         JButton reset = new JButton("초기화");
 
-        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        JPanel buttons = new JPanel(
+                new FlowLayout(FlowLayout.CENTER, 10, 2));
         buttons.add(save);
         buttons.add(load);
         buttons.add(reset);
@@ -71,9 +87,9 @@ public class ProfileFileManager extends JFrame {
         // -------------------------------------------------
         // 4. 전체 화면 배치
         // -------------------------------------------------
-        content.add(form, BorderLayout.NORTH);
-        content.add(introPanel, BorderLayout.CENTER);
-        content.add(south, BorderLayout.SOUTH);
+        mainPanel.add(form, BorderLayout.NORTH);
+        mainPanel.add(introPanel, BorderLayout.CENTER);
+        mainPanel.add(south, BorderLayout.SOUTH);
 
         // -------------------------------------------------
         // 5. 이벤트 처리
@@ -83,8 +99,8 @@ public class ProfileFileManager extends JFrame {
         reset.addActionListener(e -> resetForm());
 
         pack();
-        setMinimumSize(new Dimension(560, 500));
-        setSize(640, 540);
+        setMinimumSize(new Dimension(620, 520));
+        setSize(680, 560);
         setLocationRelativeTo(null);
     }
 
@@ -97,17 +113,17 @@ public class ProfileFileManager extends JFrame {
 
         gbc.gridy = row;
 
-        // 라벨 영역: 필요한 크기만 사용
+        // 라벨 영역: 필요한 폭만 사용
         gbc.gridx = 0;
         gbc.weightx = 0.0;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.WEST;
 
         JLabel label = new JLabel(labelText);
-        label.setPreferredSize(new Dimension(70, 24));
+        label.setPreferredSize(new Dimension(64, 24));
         panel.add(label, gbc);
 
-        // 입력 영역: 창 크기에 따라 가로로 확장
+        // 입력 영역: 남는 가로 공간만 자연스럽게 사용
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
