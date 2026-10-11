@@ -594,12 +594,12 @@ public class MemberListManager extends JFrame {
     }
 
     private String csvEscape(String value) {
-        String escaped = value.replace(""", """");
+        String escaped = value.replace("\"", "\"\"");
         if (escaped.contains(",")
-                || escaped.contains(""")
+                || escaped.contains("\"")
                 || escaped.contains("\n")
                 || escaped.contains("\r")) {
-            return """ + escaped + """;
+            return "\"" + escaped + "\"";
         }
         return escaped;
     }
