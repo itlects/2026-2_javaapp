@@ -116,3 +116,35 @@ jobs:
           path: Week04/Week04_Example08_GridLayout
           include-hidden-files: true
           if-no-files-found: error
+
+      - name: Example09
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example09_BorderLayout
+          path: Week04/Week04_Example09_BorderLayout
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example10
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example10_GridBagLayout
+          path: Week04/Week04_Example10_GridBagLayout
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example11
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example11_CardLayout
+          path: Week04/Week04_Example11_CardLayout
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example12
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example12_GroupLayout
+          path: Week04/Week04_Example12_GroupLayout
+          include-hidden-files: true
+          if-no-files-found: error
