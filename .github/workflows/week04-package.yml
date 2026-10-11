@@ -100,3 +100,19 @@ jobs:
           path: Week04/Week04_Workbook02_MemberListManager
           include-hidden-files: true
           if-no-files-found: error
+
+      - name: Example07
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example07_FlowLayout
+          path: Week04/Week04_Example07_FlowLayout
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Example08
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week04_Example08_GridLayout
+          path: Week04/Week04_Example08_GridLayout
+          include-hidden-files: true
+          if-no-files-found: error
