@@ -4,41 +4,123 @@ import java.awt.*;
 import javax.swing.*;
 
 public class SwingComponentsDemo extends JFrame {
+
     public SwingComponentsDemo() {
         setTitle("Swing Components Demo");
-        setSize(620, 430);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
-        JPanel form = new JPanel(new GridLayout(0, 2, 8, 8));
-        JTextField name = new JTextField();
-        JPasswordField pw = new JPasswordField();
+        JPanel content = new JPanel(new BorderLayout(0, 12));
+        content.setBorder(BorderFactory.createEmptyBorder(20, 24, 20, 24));
+        setContentPane(content);
+
+        JPanel form = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(6, 6, 6, 6);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        JTextField name = new JTextField(22);
+        JPasswordField pw = new JPasswordField(22);
+
         JRadioButton male = new JRadioButton("남");
         JRadioButton female = new JRadioButton("여");
-        ButtonGroup gender = new ButtonGroup(); gender.add(male); gender.add(female);
-        JPanel genderPanel = new JPanel(); genderPanel.add(male); genderPanel.add(female);
-        JComboBox<String> grade = new JComboBox<>(new String[]{"일반","VIP","VVIP"});
-        JCheckBox agree = new JCheckBox("이메일 수신 동의");
-        JSpinner age = new JSpinner(new SpinnerNumberModel(20, 10, 100, 1));
-        JList<String> interests = new JList<>(new String[]{"Java","DB","Web","AI"});
+        ButtonGroup gender = new ButtonGroup();
+        gender.add(male);
+        gender.add(female);
 
-        form.add(new JLabel("이름")); form.add(name);
-        form.add(new JLabel("비밀번호")); form.add(pw);
-        form.add(new JLabel("성별")); form.add(genderPanel);
-        form.add(new JLabel("등급")); form.add(grade);
-        form.add(new JLabel("나이")); form.add(age);
-        form.add(new JLabel("수신")); form.add(agree);
-        form.add(new JLabel("관심분야")); form.add(new JScrollPane(interests));
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        genderPanel.add(male);
+        genderPanel.add(female);
+
+        JComboBox<String> grade =
+                new JComboBox<>(new String[] {"일반", "VIP", "VVIP"});
+
+        JSpinner age =
+                new JSpinner(new SpinnerNumberModel(20, 10, 100, 1));
+
+        JCheckBox agree = new JCheckBox("이메일 수신 동의");
+
+        JList<String> interests =
+                new JList<>(new String[] {"Java", "DB", "Web", "AI"});
+        interests.setVisibleRowCount(4);
+        interests.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        JScrollPane interestScroll = new JScrollPane(interests);
+        interestScroll.setPreferredSize(new Dimension(260, 85));
+
+        int row = 0;
+        addFormRow(form, gbc, row++, "이름", name);
+        addFormRow(form, gbc, row++, "비밀번호", pw);
+        addFormRow(form, gbc, row++, "성별", genderPanel);
+        addFormRow(form, gbc, row++, "등급", grade);
+        addFormRow(form, gbc, row++, "나이", age);
+        addFormRow(form, gbc, row++, "수신", agree);
+        addFormRow(form, gbc, row++, "관심분야", interestScroll);
+
+        // Keep the form near the top even when the window becomes taller.
+        gbc.gridx = 0;
+        gbc.gridy = row;
+        gbc.gridwidth = 2;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        form.add(Box.createVerticalGlue(), gbc);
 
         JButton show = new JButton("입력값 확인");
-        show.addActionListener(e -> JOptionPane.showMessageDialog(this,
-            "이름: " + name.getText() + "\n등급: " + grade.getSelectedItem() +
-            "\n나이: " + age.getValue()));
+        show.setPreferredSize(new Dimension(140, 34));
 
-        add(form, BorderLayout.CENTER);
-        add(show, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        buttonPanel.add(show);
+
+        show.addActionListener(e -> {
+            String selectedGender =
+                    male.isSelected() ? "남"
+                    : female.isSelected() ? "여"
+                    : "선택 안 함";
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "이름: " + name.getText()
+                    + "\n성별: " + selectedGender
+                    + "\n등급: " + grade.getSelectedItem()
+                    + "\n나이: " + age.getValue()
+                    + "\n이메일 수신 동의: " + (agree.isSelected() ? "예" : "아니오")
+                    + "\n관심분야: " + interests.getSelectedValuesList()
+            );
+        });
+
+        content.add(form, BorderLayout.CENTER);
+        content.add(buttonPanel, BorderLayout.SOUTH);
+
+        pack();
+        setMinimumSize(new Dimension(520, 480));
+        setSize(620, 520);
+        setLocationRelativeTo(null);
     }
+
+    private void addFormRow(
+            JPanel form,
+            GridBagConstraints gbc,
+            int row,
+            String labelText,
+            Component component) {
+
+        gbc.gridy = row;
+
+        gbc.gridx = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 0.0;
+        gbc.weighty = 0.0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.WEST;
+        form.add(new JLabel(labelText), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        form.add(component, gbc);
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SwingComponentsDemo().setVisible(true));
+        SwingUtilities.invokeLater(() ->
+                new SwingComponentsDemo().setVisible(true));
     }
 }
