@@ -16,135 +16,135 @@ jobs:
       - name: Example01
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example01_TextFileRead
-          path: Week04/Week04_Example01_TextFileRead
+          name: Week04_Example09_TextFileRead
+          path: Week04/Week04_Example09_TextFileRead
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example02
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example02_TextFileWrite
-          path: Week04/Week04_Example02_TextFileWrite
+          name: Week04_Example10_TextFileWrite
+          path: Week04/Week04_Example10_TextFileWrite
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example03
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example03_BufferedCopy
-          path: Week04/Week04_Example03_BufferedCopy
+          name: Week04_Example11_BufferedCopy
+          path: Week04/Week04_Example11_BufferedCopy
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example04
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example04_GuiTextEditor
-          path: Week04/Week04_Example04_GuiTextEditor
+          name: Week04_Example12_GuiTextEditor
+          path: Week04/Week04_Example12_GuiTextEditor
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Practice01
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Practice01_StudentMemo
-          path: Week04/Week04_Practice01_StudentMemo
+          name: Week04_Practice02_StudentMemo
+          path: Week04/Week04_Practice02_StudentMemo
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Practice02
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Practice02_SimpleLogViewer
-          path: Week04/Week04_Practice02_SimpleLogViewer
+          name: Week04_Practice03_SimpleLogViewer
+          path: Week04/Week04_Practice03_SimpleLogViewer
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Workbook01
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Workbook01_ProfileFileManager
-          path: Week04/Week04_Workbook01_ProfileFileManager
+          name: Week04_Workbook02_ProfileFileManager
+          path: Week04/Week04_Workbook02_ProfileFileManager
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example05
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example05_SwingComponents
-          path: Week04/Week04_Example05_SwingComponents
+          name: Week04_Example07_SwingComponents
+          path: Week04/Week04_Example07_SwingComponents
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example06
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example06_JTableBasic
-          path: Week04/Week04_Example06_JTableBasic
+          name: Week04_Example08_JTableBasic
+          path: Week04/Week04_Example08_JTableBasic
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Practice03
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Practice03_MemberManager
-          path: Week04/Week04_Practice03_MemberManager
+          name: Week04_Practice01_MemberManager
+          path: Week04/Week04_Practice01_MemberManager
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Workbook02
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Workbook02_MemberListManager
-          path: Week04/Week04_Workbook02_MemberListManager
+          name: Week04_Workbook01_MemberListManager
+          path: Week04/Week04_Workbook01_MemberListManager
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example07
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example07_FlowLayout
-          path: Week04/Week04_Example07_FlowLayout
+          name: Week04_Example01_FlowLayout
+          path: Week04/Week04_Example01_FlowLayout
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example08
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example08_GridLayout
-          path: Week04/Week04_Example08_GridLayout
+          name: Week04_Example02_GridLayout
+          path: Week04/Week04_Example02_GridLayout
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example09
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example09_BorderLayout
-          path: Week04/Week04_Example09_BorderLayout
+          name: Week04_Example03_BorderLayout
+          path: Week04/Week04_Example03_BorderLayout
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example10
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example10_GridBagLayout
-          path: Week04/Week04_Example10_GridBagLayout
+          name: Week04_Example04_GridBagLayout
+          path: Week04/Week04_Example04_GridBagLayout
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example11
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example11_CardLayout
-          path: Week04/Week04_Example11_CardLayout
+          name: Week04_Example05_CardLayout
+          path: Week04/Week04_Example05_CardLayout
           include-hidden-files: true
           if-no-files-found: error
 
       - name: Example12
         uses: actions/upload-artifact@v4
         with:
-          name: Week04_Example12_GroupLayout
-          path: Week04/Week04_Example12_GroupLayout
+          name: Week04_Example06_GroupLayout
+          path: Week04/Week04_Example06_GroupLayout
           include-hidden-files: true
           if-no-files-found: error
