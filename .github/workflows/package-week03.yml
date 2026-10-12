@@ -19,6 +19,9 @@ jobs:
           cp -R Week03/Week03_Example02_ItemEvent dist/
           cp -R Week03/Week03_Example03_KeyFocusEvent dist/
           cp -R Week03/Week03_Example04_MouseEvent dist/
+          cp -R Week03/Week03_Example05_ForegroundTimer dist/
+          cp -R Week03/Week03_Example06_SwingWorkerDownload dist/
+          cp -R Week03/Week03_Example07_SwingWorkerCancel dist/
           cp -R Week03/Week03_Practice01_LoginEventUpgrade dist/
           cp -R Week03/Week03_Practice02_SignUpEventUpgrade dist/
           cp -R Week03/Week03_Practice03_EventMonitor dist/
@@ -80,3 +83,22 @@ jobs:
           path: Week03/Week03_Workbook01_CourseRegistrationEvent
           include-hidden-files: true
 
+
+      - name: Upload Example05
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example05_ForegroundTimer
+          path: Week03/Week03_Example05_ForegroundTimer
+          include-hidden-files: true
+      - name: Upload Example06
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example06_SwingWorkerDownload
+          path: Week03/Week03_Example06_SwingWorkerDownload
+          include-hidden-files: true
+      - name: Upload Example07
+        uses: actions/upload-artifact@v4
+        with:
+          name: Week03_Example07_SwingWorkerCancel
+          path: Week03/Week03_Example07_SwingWorkerCancel
+          include-hidden-files: true
