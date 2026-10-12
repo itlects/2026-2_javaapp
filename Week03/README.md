@@ -16,11 +16,14 @@ ActionEvent, ItemEvent, KeyEvent, FocusEvent, MouseEvent를 단계적으로 연�
 2. Week03_Example02_ItemEvent
 3. Week03_Example03_KeyFocusEvent
 4. Week03_Example04_MouseEvent
+5. Week03_Example05_ForegroundTimer
+6. Week03_Example06_SwingWorkerDownload
+7. Week03_Example07_SwingWorkerCancel
 
 ### 실습
-5. Week03_Practice01_LoginEventUpgrade
-6. Week03_Practice02_SignUpEventUpgrade
-7. Week03_Practice03_EventMonitor
+8. Week03_Practice01_LoginEventUpgrade
+9. Week03_Practice02_SignUpEventUpgrade
+10. Week03_Practice03_EventMonitor
 
 ## 학습 연결
 - Week02: GUI 화면 구성, 컴포넌트 배치, Login/SignUp 결과 화면 완성
@@ -31,7 +34,7 @@ ActionEvent, ItemEvent, KeyEvent, FocusEvent, MouseEvent를 단계적으로 연�
 2. General > Existing Projects into Workspace
 3. Select archive file
 4. Week03_EventHandling_EclipseProjects.zip 선택
-5. 예제 4개와 실습 3개를 확인하고 Finish
+5. 예제 7개와 실습 3개를 확인하고 Finish
 
 ## 개발 환경
 - Eclipse
@@ -49,7 +52,7 @@ ActionEvent, ItemEvent, KeyEvent, FocusEvent, MouseEvent를 단계적으로 연�
 
 ## 이전 초안 프로젝트 안내
 Week03 폴더에는 초기 작성 단계의 프로젝트가 일부 남아 있을 수 있습니다.
-현재 강의 및 Google Drive 배포의 기준은 위에 명시한 **예제 4개 + 실습 3개**입니다.
+현재 강의 및 Google Drive 배포의 기준은 위에 명시한 **예제 7개 + 실습 3개**입니다.
 
 현재 배포에서 제외되는 초기 초안:
 - Week03_Example01_ButtonEvent
@@ -60,4 +63,10 @@ Week03 폴더에는 초기 작성 단계의 프로젝트가 일부 남아 있을
 - Week03_Practice02_SignUp
 - Week03_Practice03_Layout
 
-학생 배포 및 수업에서는 위 초기 초안 대신 Event Handling 프로젝트 7개를 사용합니다.
+학생 배포 및 수업에서는 위 초기 초안 대신 Event Handling 프로젝트 10개를 사용합니다.
+
+## 추가 이론 예제 연결
+- Example05: 사용자 버튼 이벤트와 Swing Timer 비교
+- Example06: SwingWorker로 EDT를 막지 않는 장시간 작업 처리
+- Example07: cancel(true), isCancelled(), done()을 이용한 취소 처리
+- Example01의 main()은 EventQueue.invokeLater()를 사용하며 EDT 실행 원리를 함께 학습합니다.
