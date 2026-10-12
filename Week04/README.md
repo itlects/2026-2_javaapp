@@ -1,7 +1,7 @@
 # Week04 - Swing Data Management + Java File I/O
 
 ## 학습 주제
-- Swing Layout Manager: FlowLayout, GridLayout, BorderLayout, GridBagLayout
+- Swing Layout Manager: FlowLayout, GridLayout, BorderLayout, GridBagLayout, CardLayout, GroupLayout
 - 다양한 Swing 컴포넌트의 데이터 입력 활용
 - JTable / DefaultTableModel
 - JTable 행 추가·수정·삭제
@@ -18,27 +18,27 @@
 ## 프로젝트
 
 ### 예제
-1. Week04_Example09_TextFileRead
-2. Week04_Example10_TextFileWrite
-3. Week04_Example11_BufferedCopy
-4. Week04_Example12_GuiTextEditor
-5. Week04_Example07_SwingComponents
-6. Week04_Example08_JTableBasic
-7. Week04_Example01_FlowLayout
-8. Week04_Example02_GridLayout
-9. Week04_Example03_BorderLayout
-10. Week04_Example04_GridBagLayout
-11. Week04_Example05_CardLayout
-12. Week04_Example06_GroupLayout
+1. Week04_Example01_FlowLayout
+2. Week04_Example02_GridLayout
+3. Week04_Example03_BorderLayout
+4. Week04_Example04_GridBagLayout
+5. Week04_Example05_CardLayout
+6. Week04_Example06_GroupLayout
+7. Week04_Example07_SwingComponents
+8. Week04_Example08_JTableBasic
+9. Week04_Example09_TextFileRead
+10. Week04_Example10_TextFileWrite
+11. Week04_Example11_BufferedCopy
+12. Week04_Example12_GuiTextEditor
 
 ### 실습
-13. Week04_Practice02_StudentMemo
-14. Week04_Practice03_SimpleLogViewer
-15. Week04_Practice01_MemberManager
+1. Week04_Practice01_MemberManager
+2. Week04_Practice02_StudentMemo
+3. Week04_Practice03_SimpleLogViewer
 
 ### 워크북
-16. Week04_Workbook02_ProfileFileManager
-17. Week04_Workbook01_MemberListManager
+1. Week04_Workbook01_MemberListManager
+2. Week04_Workbook02_ProfileFileManager
 
 각 프로젝트는 Eclipse에서 **File > Import > Existing Projects into Workspace** 로 가져올 수 있도록 `.project`, `.classpath`를 포함합니다.
 
