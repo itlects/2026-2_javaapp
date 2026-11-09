@@ -113,10 +113,22 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 
 파일: `examples/hello.jsp`
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter" %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>동적 페이지</title></head><body><h1>서버에서 생성한 페이지</h1><p>서버 시각: <%= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) %></p><p>1 + 2 = <%= 1 + 2 %></p><a href="../index.jsp">홈으로</a></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>동적 페이지</title>
+    </head>
+    <body>
+        <h1>서버에서 생성한 페이지</h1>
+        <p>서버 시각:<%= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) %></p>
+        <p>1 + 2 =<%= 1 + 2 %></p>
+        <a href="../index.jsp">홈으로</a>
+    </body>
+</html>
 ```
 
 ### 예제 2 — HTML Form과 request·response
@@ -125,31 +137,76 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 
 파일: `examples/form.jsp`
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>폼 입력</title></head><body><h1>이름과 관심 분야 전송</h1><form action="result.jsp" method="post"><label>이름 <input name="name" required maxlength="30"></label><label>관심 분야 <select name="topic"><option value="JSP">JSP</option><option value="Java">Java</option></select></label><button>전송</button></form><a href="../index.jsp">홈으로</a></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>폼 입력</title>
+    </head>
+    <body>
+        <h1>이름과 관심 분야 전송</h1>
+        <form action="result.jsp" method="post">
+            <label>
+                이름
+                <input name="name" required maxlength="30">
+            </label>
+            <label>
+                관심 분야
+                <select name="topic">
+                    <option value="JSP">JSP</option>
+                    <option value="Java">Java</option>
+                </select>
+            </label>
+            <button>전송</button>
+        </form>
+        <a href="../index.jsp">홈으로</a>
+    </body>
+</html>
 ```
 
 파일: `examples/result.jsp`
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%!
-private String escapeHtml(String value) {
-    if (value == null) return "";
-    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-                .replace("\"", "&quot;").replace("'", "&#39;");
-}
+    private String escapeHtml(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                    .replace("\"", "&quot;").replace("'", "&#39;");
+    }
 %>
 <%
-request.setCharacterEncoding("UTF-8");
-if (!"POST".equals(request.getMethod())) { response.sendError(405); return; }
-String name = request.getParameter("name");
-String topic = request.getParameter("topic");
-if (name == null || name.isBlank() || name.length() > 30 ||
-    !("JSP".equals(topic) || "Java".equals(topic))) { response.sendError(400); return; }
+    request.setCharacterEncoding("UTF-8");
+    if (!"POST".equals(request.getMethod())) {
+        response.sendError(405);
+        return;
+    }
+    String name = request.getParameter("name");
+    String topic = request.getParameter("topic");
+    if (name == null || name.isBlank() || name.length() > 30 ||
+        !("JSP".equals(topic) || "Java".equals(topic))) {
+        response.sendError(400);
+        return;
+    }
 %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>요청 결과</title></head><body><h1>요청 결과</h1><p>이름: <%= escapeHtml(name) %></p><p>관심 분야: <%= escapeHtml(topic) %></p><p>메서드: <%= request.getMethod() %></p><a href="form.jsp">다시 입력</a></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>요청 결과</title>
+    </head>
+    <body>
+        <h1>요청 결과</h1>
+        <p>이름:<%= escapeHtml(name) %></p>
+        <p>관심 분야:<%= escapeHtml(topic) %></p>
+        <p>메서드:<%= request.getMethod() %></p>
+        <a href="form.jsp">다시 입력</a>
+    </body>
+</html>
 ```
 
 관찰 질문: input의 name을 `studentName`으로 바꾸고 서버 키는 그대로 두면 왜 400이 되는가? required를 개발자 도구로 지워 빈 값을 보내도 서버 검사가 작동하는가? 이름에 `<b>홍길동</b>`를 넣으면 굵은 글씨가 아닌 문자열로 보이는가?

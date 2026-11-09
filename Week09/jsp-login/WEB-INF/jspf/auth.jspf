@@ -1,7 +1,7 @@
 <%
-response.setHeader("Cache-Control", "no-store");
-if (session.getAttribute("loginUser") == null) {
-    response.sendRedirect(request.getContextPath() + "/login.jsp");
-    return;
-}
+    response.setHeader("Cache-Control", "no-store");
+    if (session.getAttribute("loginUser") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
 %>

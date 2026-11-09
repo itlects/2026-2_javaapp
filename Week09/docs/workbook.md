@@ -48,9 +48,18 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
- <display-name>Week09 Learning Portal</display-name>
- <session-config><session-timeout>15</session-timeout><cookie-config><http-only>true</http-only></cookie-config></session-config>
- <welcome-file-list><welcome-file>index.jsp</welcome-file></welcome-file-list>
+    <display-name>Week09 Learning Portal</display-name>
+    <session-config>
+        <session-timeout>15</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>
+            index.jsp
+        </welcome-file>
+    </welcome-file-list>
 </web-app>
 ```
 
@@ -61,7 +70,71 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 정적 CSS 파일입니다. 이후 화면에서 파란 헤더·흰 카드·둥근 버튼이 보이는지 확인합니다.
 
 ```css
-*{box-sizing:border-box}body{margin:0;background:#f1f5fb;color:#18243c;font:17px/1.65 system-ui,sans-serif}header{background:#173d8f;color:white;padding:24px 8%}main{max-width:960px;margin:36px auto;padding:0 24px}.card{background:white;border:1px solid #dce4f0;border-radius:18px;padding:28px;margin-bottom:22px;box-shadow:0 8px 24px #173d8f09}h1,h2{line-height:1.3}label{display:block;margin:16px 0}input{display:block;width:100%;padding:12px;border:1px solid #a4b5ce;border-radius:8px;font:inherit}button,.button{display:inline-block;background:#245bd6;color:white;border:0;border-radius:8px;padding:12px 22px;font:inherit;text-decoration:none;cursor:pointer}a{color:#245bd6}.error{color:#af1834}.badge{font-size:14px;letter-spacing:.1em}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid #dce4f0;padding:12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}footer{color:#576984;margin:24px 0}
+* {
+    box-sizing: border-box}
+    body {
+        margin: 0;
+        background: #f1f5fb;
+        color: #18243c;
+        font: 17px/1.65 system-ui,sans-serif}
+        header {
+            background: #173d8f;
+            color: white;
+            padding: 24px 8%}
+            main {
+                max-width: 960px;
+                margin: 36px auto;
+                padding: 0 24px}
+                .card {
+                    background: white;
+                    border: 1px solid #dce4f0;
+                    border-radius: 18px;
+                    padding: 28px;
+                    margin-bottom: 22px;
+                    box-shadow: 0 8px 24px #173d8f09}
+                    h1,h2 {
+                        line-height: 1.3}
+                        label {
+                            display: block;
+                            margin: 16px 0}
+                            input {
+                                display: block;
+                                width: 100%;
+                                padding: 12px;
+                                border: 1px solid #a4b5ce;
+                                border-radius: 8px;
+                                font: inherit}
+                                button,.button {
+                                    display: inline-block;
+                                    background: #245bd6;
+                                    color: white;
+                                    border: 0;
+                                    border-radius: 8px;
+                                    padding: 12px 22px;
+                                    font: inherit;
+                                    text-decoration: none;
+                                    cursor: pointer}
+                                    a {
+                                        color: #245bd6}
+                                        .error {
+                                            color: #af1834}
+                                            .badge {
+                                                font-size: 14px;
+                                                letter-spacing: .1em}
+                                                table {
+                                                    width: 100%;
+                                                    border-collapse: collapse}
+                                                    td,th {
+                                                        text-align: left;
+                                                        border-bottom: 1px solid #dce4f0;
+                                                        padding: 12px}
+                                                        .grid {
+                                                            display: grid;
+                                                            grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+                                                            gap: 18px}
+                                                            footer {
+                                                                color: #576984;
+                                                                margin: 24px 0}
 ```
 
 ## 단계 4. 홈 화면
@@ -70,12 +143,58 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 
 /jsp-login/에 접속합니다. 처음에는 아직 만들지 않은 링크가 404가 될 수 있으므로 다음 단계까지 작성합니다.
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>JAVA 학습 포털</title><link rel="stylesheet" href="style.css"></head><body>
-<header><span class="badge">JAVA APPLICATION · WEEK 09</span><h1>나의 JAVA 학습 포털</h1></header>
-<main><section class="card"><h2>로그인하고 학습 현황을 확인하세요</h2><p>폼 전송부터 세션까지, JSP로 완성하는 첫 번째 웹서비스</p><a class="button" href="login.jsp">로그인 시작</a></section>
-<section class="grid"><article class="card"><h2>01. 동적 페이지</h2><a href="examples/hello.jsp">서버 시간 확인</a></article><article class="card"><h2>02. 폼과 요청</h2><a href="examples/form.jsp">한글 입력 실험</a></article><article class="card"><h2>03. 회원 페이지</h2><a href="dashboard.jsp">나의 학습 현황</a></article></section><footer>교육용 계정: student / Java1234! · 실제 개인정보를 입력하지 마세요.</footer></main></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>JAVA 학습 포털</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <span class="badge">JAVA APPLICATION · WEEK 09</span>
+            <h1>나의 JAVA 학습 포털</h1>
+        </header>
+        <main>
+            <section class="card">
+                <h2>로그인하고 학습 현황을 확인하세요</h2>
+                <p>폼 전송부터 세션까지, JSP로 완성하는 첫 번째 웹서비스</p>
+                <a class="button" href="login.jsp">로그인 시작</a>
+            </section>
+            <section class="grid">
+                <article class="card">
+                    <h2>
+                        01. 동적 페이지
+                    </h2>
+                    <a href="examples/hello.jsp">
+                        서버 시간 확인
+                    </a>
+                </article>
+                <article class="card">
+                    <h2>
+                        02. 폼과 요청
+                    </h2>
+                    <a href="examples/form.jsp">
+                        한글 입력 실험
+                    </a>
+                </article>
+                <article class="card">
+                    <h2>
+                        03. 회원 페이지
+                    </h2>
+                    <a href="dashboard.jsp">
+                        나의 학습 현황
+                    </a>
+                </article>
+            </section>
+            <footer>
+                교육용 계정: student / Java1234! · 실제 개인정보를 입력하지 마세요.
+            </footer>
+        </main>
+    </body>
+</html>
 ```
 
 ## 단계 5. 로그인 폼
@@ -84,11 +203,42 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 
 /jsp-login/login.jsp에서 입력창과 버튼을 확인합니다. name=userId/password, action=loginAction.jsp, method=post를 찾아 표시합니다.
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>로그인 | JAVA 학습 포털</title><link rel="stylesheet" href="style.css"></head><body><header><h1>JAVA 학습 포털</h1></header><main><section class="card"><h2>로그인</h2>
-<% if ("1".equals(request.getParameter("error"))) { %><p class="error" role="alert">아이디 또는 비밀번호를 확인하세요.</p><% } %>
-<form action="loginAction.jsp" method="post"><label>아이디<input name="userId" required maxlength="30" autocomplete="username"></label><label>비밀번호<input type="password" name="password" required maxlength="100" autocomplete="current-password"></label><button type="submit">로그인</button></form><p>실습 계정: student / Java1234!</p><a href="index.jsp">홈으로</a></section></main></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>로그인 | JAVA 학습 포털</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>JAVA 학습 포털</h1>
+        </header>
+        <main>
+            <section class="card">
+                <h2>로그인</h2>
+                <% if ("1".equals(request.getParameter("error"))) { %>
+                <p class="error" role="alert">아이디 또는 비밀번호를 확인하세요.</p>
+                <% } %>
+                <form action="loginAction.jsp" method="post">
+                    <label>
+                        아이디
+                        <input name="userId" required maxlength="30" autocomplete="username">
+                    </label>
+                    <label>
+                        비밀번호
+                        <input type="password" name="password" required maxlength="100" autocomplete="current-password">
+                    </label>
+                    <button type="submit">로그인</button>
+                </form>
+                <p>실습 계정: student / Java1234!</p>
+                <a href="index.jsp">홈으로</a>
+            </section>
+        </main>
+    </body>
+</html>
 ```
 
 ## 단계 6. 로그인 처리
@@ -97,23 +247,26 @@ Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window �
 
 고정 계정 비교, changeSessionId, 세션 저장, redirect 순서를 설명합니다. 이 단계에서는 다음 회원 화면 파일을 작성한 뒤 로그인 전체를 검사합니다.
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-request.setCharacterEncoding("UTF-8");
-if (!"POST".equals(request.getMethod())) { response.sendError(405); return; }
-String userId = request.getParameter("userId");
-String password = request.getParameter("password");
-// 수업용 고정 계정. 운영 서비스에서는 DB + 비밀번호 해시 검증으로 교체한다.
-if ("student".equals(userId) && "Java1234!".equals(password)) {
-    request.changeSessionId();
-    session.setAttribute("loginUser", "student");
-    session.setAttribute("displayName", "자바 학습자");
-    session.setAttribute("csrfToken", java.util.UUID.randomUUID().toString());
-    response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
-} else {
-    response.sendRedirect(request.getContextPath() + "/login.jsp?error=1");
-}
+    request.setCharacterEncoding("UTF-8");
+    if (!"POST".equals(request.getMethod())) {
+        response.sendError(405);
+        return;
+    }
+    String userId = request.getParameter("userId");
+    String password = request.getParameter("password");
+    // 수업용 고정 계정. 운영 서비스에서는 DB + 비밀번호 해시 검증으로 교체한다.
+    if ("student".equals(userId) && "Java1234!".equals(password)) {
+        request.changeSessionId();
+        session.setAttribute("loginUser", "student");
+        session.setAttribute("displayName", "자바 학습자");
+        session.setAttribute("csrfToken", java.util.UUID.randomUUID().toString());
+        response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+    } else {
+        response.sendRedirect(request.getContextPath() + "/login.jsp?error=1");
+    }
 %>
 ```
 
@@ -123,13 +276,13 @@ if ("student".equals(userId) && "Java1234!".equals(password)) {
 
 서버 내부에서 include하는 조각입니다. 로그인 상태가 없으면 redirect 후 return하므로 보호 화면이 출력되지 않습니다.
 
-```jsp
+```html
 <%
-response.setHeader("Cache-Control", "no-store");
-if (session.getAttribute("loginUser") == null) {
-    response.sendRedirect(request.getContextPath() + "/login.jsp");
-    return;
-}
+    response.setHeader("Cache-Control", "no-store");
+    if (session.getAttribute("loginUser") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
 %>
 ```
 
@@ -139,12 +292,65 @@ if (session.getAttribute("loginUser") == null) {
 
 먼저 새 시크릿 창에서 직접 접근하면 login.jsp로 이동하는지 확인합니다. 이어 정상 로그인하면 환영 문구와 학습표가 보입니다.
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/auth.jspf" %>
-<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>나의 학습 현황</title><link rel="stylesheet" href="style.css"></head><body><header><span class="badge">MY LEARNING</span><h1>나의 학습 현황</h1></header><main><section class="card"><h2><%= session.getAttribute("displayName") %>님, 환영합니다</h2><p>로그인 계정: <%= session.getAttribute("loginUser") %></p><p>출력 이름과 계정은 서버가 지정한 고정 문자열입니다.</p>
-<table><thead><tr><th>학습 항목</th><th>이번 주 목표</th></tr></thead><tbody><tr><td>WEB · Tomcat</td><td>요청과 응답 흐름 설명하기</td></tr><tr><td>HTML Form</td><td>POST로 매개변수 보내기</td></tr><tr><td>JSP 로그인</td><td>세션 확인과 로그아웃 구현하기</td></tr></tbody></table>
-<form action="logout.jsp" method="post"><input type="hidden" name="csrfToken" value="<%= session.getAttribute("csrfToken") %>"><p><button type="submit">로그아웃</button> <a href="index.jsp">홈으로</a></p></form></section></main></body></html>
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>나의 학습 현황</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <span class="badge">MY LEARNING</span>
+            <h1>나의 학습 현황</h1>
+        </header>
+        <main>
+            <section class="card">
+                <h2><%= session.getAttribute("displayName") %>님, 환영합니다</h2>
+                <p>로그인 계정:<%= session.getAttribute("loginUser") %></p>
+                <p>출력 이름과 계정은 서버가 지정한 고정 문자열입니다.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                학습 항목
+                            </th>
+                            <th>이번 주 목표</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>WEB · Tomcat</td>
+                            <td>요청과 응답 흐름 설명하기</td>
+                        </tr>
+                        <tr>
+                            <td>HTML Form</td>
+                            <td>POST로 매개변수 보내기</td>
+                        </tr>
+                        <tr>
+                            <td>JSP 로그인</td>
+                            <td>세션 확인과 로그아웃 구현하기</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form action="logout.jsp" method="post">
+                    <input type="hidden" name="csrfToken" value="<%= session.getAttribute("csrfToken") %>">
+                    <p>
+                        <button type="submit">
+                            로그아웃
+                        </button>
+                        <a href="index.jsp">
+                            홈으로
+                        </a>
+                    </p>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>
 ```
 
 ## 단계 9. 로그아웃
@@ -153,17 +359,21 @@ if (session.getAttribute("loginUser") == null) {
 
 회원 화면의 버튼으로 POST 전송합니다. 세션 토큰이 맞을 때 세션을 삭제합니다. 주소창 GET은 405, 잘못된 토큰은 403입니다.
 
-```jsp
+```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-request.setCharacterEncoding("UTF-8");
-if (!"POST".equals(request.getMethod())) { response.sendError(405); return; }
-String expected = (String) session.getAttribute("csrfToken");
-if (expected == null || !expected.equals(request.getParameter("csrfToken"))) {
-    response.sendError(403); return;
-}
-session.invalidate();
-response.sendRedirect(request.getContextPath() + "/login.jsp");
+    request.setCharacterEncoding("UTF-8");
+    if (!"POST".equals(request.getMethod())) {
+        response.sendError(405);
+        return;
+    }
+    String expected = (String) session.getAttribute("csrfToken");
+    if (expected == null || !expected.equals(request.getParameter("csrfToken"))) {
+        response.sendError(403);
+        return;
+    }
+    session.invalidate();
+    response.sendRedirect(request.getContextPath() + "/login.jsp");
 %>
 ```
 
