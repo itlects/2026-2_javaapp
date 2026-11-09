@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>과제 등록 및 수정</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body><main>
+    <h1 th:text="${id == null ? '과제 등록' : '과제 수정'}"></h1>
+    <form method="post" th:object="${taskForm}"
+          th:action="${id == null} ? @{/tasks} : @{/tasks/{id}(id=${id})}">
+        <label>과제명
+            <input th:field="*{title}" maxlength="100" required>
+        </label>
+        <p class="error" th:errors="*{title}"></p>
+        <label>상태
+            <select th:field="*{status}">
+                <option value="TODO">TODO · 예정</option>
+                <option value="DOING">DOING · 진행</option>
+                <option value="DONE">DONE · 완료</option>
+            </select>
+        </label>
+        <p class="error" th:errors="*{status}"></p>
+        <button>저장</button>
+        <a th:href="@{/tasks}">취소</a>
+    </form>
+</main></body>
+</html>

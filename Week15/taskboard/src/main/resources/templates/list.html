@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>학습 과제 관리</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body><main>
+    <p>JAVA 응용 · Week15</p>
+    <h1>학습 과제 관리</h1>
+    <a class="button" th:href="@{/tasks/new}">새 과제 등록</a>
+    <form method="get" th:action="@{/tasks}">
+        <label>제목 검색 <input name="q" th:value="${q}" maxlength="100"></label>
+        <button>검색</button>
+        <a th:href="@{/tasks}">전체 보기</a>
+    </form>
+    <p th:text="|총 ${count}건 · ${page + 1}페이지|">총 0건</p>
+    <table>
+        <thead><tr><th>번호</th><th>과제명</th><th>상태</th><th>관리</th></tr></thead>
+        <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.id}"></td>
+                <td th:text="${task.title}"></td>
+                <td th:text="${task.status}"></td>
+                <td>
+                    <a th:href="@{/tasks/{id}/edit(id=${task.id})}">수정</a>
+                    <form method="post" th:action="@{/tasks/{id}/delete(id=${task.id})}"
+                          onsubmit="return confirm('이 과제를 삭제할까요?')">
+                        <button>삭제</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(tasks)}"><td colspan="4">검색 결과가 없습니다.</td></tr>
+        </tbody>
+    </table>
+    <nav>
+        <a th:if="${page > 0}" th:href="@{/tasks(q=${q},page=${page - 1})}">이전</a>
+        <a th:if="${(page + 1) * 5 < count}" th:href="@{/tasks(q=${q},page=${page + 1})}">다음</a>
+    </nav>
+</main></body>
+</html>
