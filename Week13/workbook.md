@@ -43,7 +43,7 @@ Spring Boot 3.5 계열의 Java 21 호환성과 MVC·Thymeleaf 사용법은 아�
 ## 1. 준비·가져오기·실행
 ### 단계 1. 프로젝트 준비
 
-1. 제공한 ZIP을 `C:\javaapp\Week13`에 압축 해제합니다. `spring-members\pom.xml`이 있는지 확인합니다. 파일 탐색기의 확장명 표시를 켜서 `.java.txt`, `.html.txt`가 되지 않도록 합니다.
+1. ZIP의 압축 해제 위치를 `C:\javaapp`로 지정합니다. ZIP의 최상위 `Week13` 폴더가 생성되며 `C:\javaapp\Week13\spring-members\pom.xml`이 있는지 확인합니다. 파일 탐색기의 확장명 표시를 켜서 `.java.txt`, `.html.txt`가 되지 않도록 합니다.
 2. Eclipse → File → Import → Maven → Existing Maven Projects → Root Directory에 `spring-members`를 선택합니다. pom.xml 체크 후 Finish를 누릅니다. Maven 의존성 다운로드가 끝날 때까지 기다립니다.
 3. 빨간 오류가 남으면 프로젝트 우클릭 → Maven → Update Project → Force Update를 선택합니다. 인터넷 연결이 필요합니다. 실행 환경은 Java 21입니다.
 4. 직접 새로 만드는 경우 https://start.spring.io 에서 Maven / Java / Jar / Java 21, Group `com.example`, Artifact `spring-members`, Package `com.example.members`, Dependencies `Spring Web`, `Thymeleaf`, `JDBC API`, `MySQL Driver`를 선택합니다. 3.5.7이 선택 목록에 없으면 제공한 pom.xml 전체로 교체하고 Maven Update를 실행합니다. 제공본은 Maven Wrapper를 포함하지 않으므로 `mvnw.cmd` 명령을 사용하지 않습니다.
