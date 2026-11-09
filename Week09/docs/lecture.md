@@ -1,0 +1,210 @@
+수업 주제: JSP 웹 개발환경 구축과 로그인 프로그램 구현. 사용자가 제시한 강의계획서 9주차 항목을 모두 반영했습니다. 별도 DB 설치 없이 WEB의 요청·응답 원리부터 로그인 상태 관리까지 연결합니다.
+
+| 목차 | 학습 내용 | 권장 시간 |
+|---|---|---|
+| 1. 학습목표 | 완성 결과와 목표 확인 | 10분 |
+| 2. 이론 | WEB·Tomcat·HTML Form·JSP 객체 | 35분 |
+| 3. 예제 | 환경 구축·동적 페이지·폼 처리 | 45분 |
+| 4. 실습 및 과제 | 학습 포털 로그인 워크북 | 65분 |
+| 5. 평가문제 | 객관식·단답형 | 15분 |
+| 6. 학습요약 | 흐름 설명·자기 점검 | 10분 |
+
+## 1. 학습목표
+
+- JDK와 Tomcat을 설치하고 HTTP URL로 JSP를 실행한다.
+- 브라우저·웹서버·서블릿 컨테이너의 역할과 Tomcat 폴더 구조를 설명한다.
+- HTML Form의 action, method, name을 사용하여 요청 데이터를 전달한다.
+- JSP 지시자·스크립틀릿·표현식과 request, response, session을 구분한다.
+- 성공·실패·직접 접근·로그아웃을 검증하는 로그인 웹사이트를 완성한다.
+
+완성 결과: 홈 화면 → 로그인 화면 → 회원 학습 현황 → 로그아웃. 미로그인 상태에서 회원 페이지를 직접 열면 로그인 화면으로 이동한다.
+
+## 2. 이론
+
+### 2.1 WEB과 Tomcat의 역할
+
+브라우저는 HTTP 요청을 보내고 서버는 상태 코드·헤더·본문으로 응답합니다. 정적 HTML은 저장된 내용을 전달하고, JSP는 서버에서 Java로 처리한 결과 HTML을 생성합니다. 브라우저는 JSP 원본 Java 코드를 실행하지 않습니다. Tomcat은 HTTP 요청을 받아 정적 파일도 제공하고 Servlet/JSP를 실행하는 컨테이너입니다. 별도의 Apache HTTP Server가 없어도 이번 실습을 실행할 수 있습니다.
+
+JSP 첫 요청 또는 변경 후: JSP → Jasper가 Servlet Java 소스로 변환 → 컴파일 → 실행 → HTML 응답. 이후에는 컴파일된 클래스를 재사용합니다.
+
+| 주소 구성 | 예 | 의미 |
+|---|---|---|
+| scheme | http | 통신 방식 |
+| host:port | localhost:8080 | 로컬 서버와 HTTP 포트 |
+| context path | /jsp-login | 웹 애플리케이션 식별 |
+| resource | /examples/hello.jsp | 앱 내부 자원 |
+
+| Tomcat 폴더 | 역할 |
+|---|---|
+| bin | 시작·종료 스크립트 |
+| conf | server.xml 등 서버 설정 |
+| webapps | 웹 앱 배포 위치 |
+| work | JSP 변환·컴파일 작업 결과 |
+| logs | 시작·요청 처리 오류 확인 |
+| lib | 컨테이너 공통 라이브러리 |
+
+`WEB-INF/web.xml`은 앱 설정, `WEB-INF/classes`는 Java 클래스, `WEB-INF/lib`는 앱의 JAR 위치입니다. WEB-INF 아래는 브라우저로 직접 접근할 수 없습니다. 보통 HTML·CSS·JSP는 웹 루트에 두되 보호할 JSP 조각은 WEB-INF에 둡니다.
+
+### 2.2 HTML과 Form
+
+HTML의 head는 메타데이터, body는 화면 내용입니다. form의 action은 처리 URL, method는 HTTP 메서드입니다. input의 name이 서버가 읽는 매개변수 키입니다. id는 label·CSS·JavaScript 연결에 쓰며 name을 대신하지 않습니다. password 입력형은 화면만 가리므로 암호화 전송을 보장하지 않습니다.
+
+| 구분 | GET | POST |
+|---|---|---|
+| 폼 값 위치 | URL 쿼리 문자열 | 요청 본문 |
+| 주 용도 | 조회·검색 | 로그인·등록 등 처리 |
+| URL 노출 | 매개변수가 보임 | 주소창에 폼 값이 안 보임 |
+| 기밀성 | HTTPS 필요 | POST도 HTTPS 필요 |
+
+브라우저의 required와 maxlength만 믿을 수 없습니다. 서버에서도 null, 길이, 허용 값, HTTP 메서드를 검사해야 합니다.
+
+### 2.3 JSP 기본 문법과 내장 객체
+
+| 문법·객체 | 예 | 역할 |
+|---|---|---|
+| 지시자 | `<%@ page ... %>` | 인코딩·import 등 페이지 설정 |
+| 스크립틀릿 | `<% ... %>` | 요청 처리 Java 실행 |
+| 표현식 | `<%= 1 + 2 %>` | 계산 결과 출력, 세미콜론 없음 |
+| 선언 | `<%! ... %>` | 메서드·필드 선언, 공유 가변 필드 주의 |
+| JSP 주석 | `<%-- ... --%>` | 응답 HTML에 포함하지 않는 주석 |
+| request | `request.getParameter("name")` | 요청 매개변수 읽기, 반환은 String 또는 null |
+| response | `response.sendRedirect(...)` | 상태·헤더·이동 응답 구성 |
+| session | `session.setAttribute(...)` | 여러 요청에 걸친 로그인 상태 |
+| out | `out.print(...)` | 응답 본문 출력 |
+
+`pageEncoding`은 JSP 파일 인코딩, `contentType`의 charset은 응답 인코딩, `request.setCharacterEncoding("UTF-8")`은 POST 본문 해석을 설정합니다. POST 매개변수를 읽기 **전**에 호출합니다. 요청 범위 속성은 현재 요청에서, 세션 속성은 같은 세션의 후속 요청에서도 사용할 수 있습니다. 기본적으로 브라우저가 JSESSIONID 쿠키를 보내 세션을 식별합니다.
+
+### 2.4 Redirect·Forward·로그인
+
+`sendRedirect`는 보통 302 응답을 보내 브라우저가 새 요청을 하므로 URL이 바뀌고 request 속성이 유지되지 않습니다. `request.getRequestDispatcher(...).forward(request,response)`는 서버 안에서 같은 요청을 넘겨 request 속성을 유지하고 주소창은 유지합니다. 둘 다 응답이 커밋되기 전에 사용합니다. 이동 뒤에는 `return`으로 나머지 처리를 끝냅니다.
+
+로그인 처리 순서: POST인지 확인 → 값 읽기 → 계정 검증 → 세션 ID 갱신 → 로그인 정보 저장 → 회원 페이지로 redirect. 회원 페이지는 화면 출력 전 세션을 검사합니다. 로그아웃은 세션을 invalidate합니다. 이 수업은 원리 학습을 위해 JSP 스크립틀릿을 사용합니다. 향후에는 Servlet 컨트롤러·서비스·JSP 뷰로 역할을 분리합니다.
+
+사용자 입력을 그대로 HTML로 출력하면 XSS 위험이 있습니다. 폼 결과 예제는 HTML 이스케이프를 적용합니다. 로그인 실패 메시지는 아이디와 비밀번호 중 어느 쪽이 틀렸는지 구분하지 않습니다. 실제 운영은 HTTPS, DB와 비밀번호 해시, CSRF 방어, 시도 제한 등을 갖춰야 합니다.
+
+## 3. 예제
+
+### 준비 및 환경 구축 (Windows 10/11)
+
+1. JDK 21을 설치합니다. 명령 프롬프트에서 `java -version`, `javac -version`을 실행하여 둘 다 21인지 확인합니다. JRE만 설치하면 `javac`가 없습니다.
+2. `JAVA_HOME`을 JDK 설치 폴더로 지정합니다. 예: `C:\Java\jdk-21`. `Path`에 `%JAVA_HOME%\bin`을 추가하고 새 명령 프롬프트를 엽니다. `echo %JAVA_HOME%`으로 확인합니다.
+3. [Apache Tomcat 10.1 다운로드](https://tomcat.apache.org/download-10.cgi)에서 10.1.x의 Core ZIP을 받아 `C:\tools`에 압축을 풉니다. 이 문서에서 `C:\tools\tomcat`은 압축을 푼 실제 Tomcat 폴더를 뜻합니다. 해당 폴더 바로 아래에 bin, conf, webapps가 있어야 합니다. 새 설치에는 제공되는 최신 보안 패치를 사용합니다.
+4. 명령 프롬프트에서 다음을 실행합니다. 콘솔을 닫지 않습니다.
+
+```bat
+cd /d C:\tools\tomcat\bin
+catalina.bat run
+```
+
+5. 브라우저에서 `http://localhost:8080/`을 엽니다. Tomcat 환영 화면이 보이면 성공입니다. JSP는 파일을 더블클릭하거나 Live Server로 실행하지 않습니다.
+6. `webapps` 아래에 `jsp-login` 폴더를 만듭니다. 이 폴더명이 URL의 컨텍스트 경로 `/jsp-login`이 됩니다. 완성본을 쓰려면 제공된 `jsp-login` 폴더를 통째로 복사합니다. 직접 따라 하려면 빈 폴더에 아래 파일을 순서대로 만듭니다.
+7. 편집기는 VS Code 또는 Eclipse를 사용하며 모든 파일을 UTF-8로 저장합니다. 수정 후 저장하고 브라우저를 새로 고칩니다. web.xml 변경 후에는 Tomcat을 재시작합니다.
+8. 종료는 실행 콘솔에서 Ctrl+C를 누릅니다. Linux/macOS에서는 JDK 환경 설정 후 `bin/catalina.sh run`을 사용합니다.
+
+### Eclipse를 사용할 때의 대안
+
+Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window → Preferences → Server → Runtime Environments → Add → Apache Tomcat v10.1에서 설치 폴더와 JDK 21을 지정합니다. File → New → Dynamic Web Project에서 프로젝트명 `jsp-login`, Target runtime Tomcat v10.1, Dynamic web module 6.0을 선택합니다. Next의 Web Module 화면에서 Content directory를 `src/main/webapp`으로 지정하고 web.xml 생성을 선택합니다. 제공 소스 `jsp-login`의 **내용물**을 `src/main/webapp`으로 복사합니다. 프로젝트 → Properties → Web Project Settings에서 Context root가 `jsp-login`인지 확인합니다. 프로젝트 우클릭 → Run As → Run on Server로 실행합니다.
+
+수동 배포와 Eclipse 배포는 둘 중 하나만 사용합니다. Eclipse Servers 편집기의 HTTP 포트가 8080인지 확인하세요. 선택 목록에 10.1이 없으면 Eclipse Web Tools를 업데이트합니다. Tomcat 9의 `javax.*` 예제와 Tomcat 10.1의 `jakarta.*` 코드를 섞지 않습니다.
+
+### 예제 1 — 첫 동적 페이지
+
+`jsp-login/examples/hello.jsp`를 만들고 아래 전체 코드를 저장합니다. `http://localhost:8080/jsp-login/examples/hello.jsp`에 접속해 2초 뒤 새로 고칩니다. 서버 시각이 변하고 계산값 3이 보이면 성공입니다. 페이지 소스 보기에서는 Java 코드가 보이지 않는지 확인합니다.
+
+파일: `examples/hello.jsp`
+
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter" %>
+<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>동적 페이지</title></head><body><h1>서버에서 생성한 페이지</h1><p>서버 시각: <%= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) %></p><p>1 + 2 = <%= 1 + 2 %></p><a href="../index.jsp">홈으로</a></body></html>
+```
+
+### 예제 2 — HTML Form과 request·response
+
+`examples/form.jsp`, `examples/result.jsp`를 다음 순서로 만듭니다. form.jsp에서 이름 `홍길동`, 분야 `JSP`를 전송합니다. 결과 화면에 한글과 POST가 표시되어야 합니다. 개발자 도구 Network에서 요청 URL·메서드·Form Data·응답 상태를 확인하세요. 처리 페이지를 주소창에서 직접 열면 GET이므로 405입니다.
+
+파일: `examples/form.jsp`
+
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>폼 입력</title></head><body><h1>이름과 관심 분야 전송</h1><form action="result.jsp" method="post"><label>이름 <input name="name" required maxlength="30"></label><label>관심 분야 <select name="topic"><option value="JSP">JSP</option><option value="Java">Java</option></select></label><button>전송</button></form><a href="../index.jsp">홈으로</a></body></html>
+```
+
+파일: `examples/result.jsp`
+
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%!
+private String escapeHtml(String value) {
+    if (value == null) return "";
+    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                .replace("\"", "&quot;").replace("'", "&#39;");
+}
+%>
+<%
+request.setCharacterEncoding("UTF-8");
+if (!"POST".equals(request.getMethod())) { response.sendError(405); return; }
+String name = request.getParameter("name");
+String topic = request.getParameter("topic");
+if (name == null || name.isBlank() || name.length() > 30 ||
+    !("JSP".equals(topic) || "Java".equals(topic))) { response.sendError(400); return; }
+%>
+<!doctype html><html lang="ko"><head><meta charset="UTF-8"><title>요청 결과</title></head><body><h1>요청 결과</h1><p>이름: <%= escapeHtml(name) %></p><p>관심 분야: <%= escapeHtml(topic) %></p><p>메서드: <%= request.getMethod() %></p><a href="form.jsp">다시 입력</a></body></html>
+```
+
+관찰 질문: input의 name을 `studentName`으로 바꾸고 서버 키는 그대로 두면 왜 400이 되는가? required를 개발자 도구로 지워 빈 값을 보내도 서버 검사가 작동하는가? 이름에 `<b>홍길동</b>`를 넣으면 굵은 글씨가 아닌 문자열로 보이는가?
+
+## 4. 실습 및 과제
+
+별도 워크북의 단계대로 실용 예제인 **JAVA 학습 포털**을 완성합니다. 모든 파일의 전체 코드, 작성 순서, URL, 예상 화면, 검사 항목을 제공합니다.
+
+1. 기본 과제: 홈·로그인·회원 페이지·로그아웃을 구현하고 성공·실패·직접 접근을 검증합니다.
+2. 응용 과제: dashboard에 고정 학습 항목 2개를 추가하고 제목과 CSS 색상을 변경합니다. 인증 검사 위치를 유지합니다.
+3. 탐구 과제: form.jsp의 name 제거 실험과 로그아웃 후 재접근 결과를 설명합니다.
+
+제출: 직접 작성한 프로젝트 ZIP, 성공/실패/미로그인 접근/로그아웃 후 재접근 화면 4장, 실습 결과표, 300자 이상의 request·response·session 역할 설명. 실제 비밀번호·세션 쿠키는 제출하지 않습니다. 제출 경로와 기한은 교수자 안내를 따릅니다.
+
+| 채점 항목 | 배점 | 확인 증거 |
+|---|---|---|
+| 환경과 동적 페이지 | 20 | URL·서버 시각 실행 화면 |
+| 폼·한글·입력 검증 | 20 | 정상 입력과 잘못된 요청 결과 |
+| 로그인·실패 처리 | 25 | 성공과 실패 화면 |
+| 세션 보호·로그아웃 | 25 | 직접 접근과 로그아웃 후 재접근 |
+| 보고서·코드 설명 | 10 | 관찰 결과와 설명 |
+
+## 5. 평가문제 (객관식 및 단답형)
+
+### 객관식 (각 5점)
+
+1. JSP를 Servlet으로 변환·컴파일하여 실행하는 위치는? ① 브라우저 ② Tomcat 서버 ③ CSS 엔진 ④ DNS 서버
+2. Tomcat의 기본 배포 폴더는? ① logs ② conf ③ webapps ④ bin
+3. form 데이터를 서버에서 구분하는 입력 요소 속성은? ① id ② class ③ style ④ name
+4. request.getParameter의 반환형은? ① String ② int ③ Boolean ④ Session
+5. POST 한글 인코딩은 언제 설정해야 하는가? ① 매개변수 읽기 전 ② 읽은 후 ③ 응답 완료 후 ④ 브라우저 종료 후
+6. sendRedirect에 대한 설명으로 맞는 것은? ① 항상 같은 요청 사용 ② 브라우저가 새 요청 ③ 세션 삭제 ④ JSP 원문 전송
+7. 후속 요청에서도 로그인 정보를 유지하는 데 적합한 것은? ① 지역 변수 ② request만 ③ session ④ HTML 주석
+8. 로그아웃에 사용하는 메서드는? ① session.invalidate() ② request.close() ③ out.login() ④ response.session()
+9. POST이면 HTTPS 없이도 비밀번호가 암호화된다는 설명은? ① 맞다 ② 틀리다 ③ Tomcat에서만 맞다 ④ required가 있으면 맞다
+10. WEB-INF에 대한 설명으로 맞는 것은? ① 브라우저 직접 접근 허용 ② 항상 CSS 전용 ③ 브라우저 직접 접근 차단 ④ URL 포트 설정 위치
+
+### 단답형 (각 10점)
+
+11. 아이디 입력 `name="userId"`의 값을 서버에서 읽는 한 줄을 쓰시오.
+12. UTF-8 JSP 응답과 소스 인코딩을 설정하는 page 지시자를 쓰시오.
+13. 보호된 화면 출력 전에 세션을 검사해야 하는 이유를 쓰시오.
+14. 로그인 성공 시 세션 ID를 바꾸는 메서드와 목적을 쓰시오.
+15. GET·POST 차이 한 가지와 POST만으로 기밀성이 확보되지 않는 이유를 쓰시오.
+
+객관식 50점 + 단답형 50점. 형성평가용이며 위 실습 과제 배점과 별개입니다. 정답과 해설은 별도 해설 페이지에서 확인합니다.
+
+## 6. 학습요약
+
+- 브라우저는 요청, Tomcat은 JSP 실행, response는 결과 HTML을 전달합니다.
+- Form의 action·method·name이 전송 위치·방식·키를 정합니다.
+- request는 입력, response는 응답과 이동, session은 후속 요청의 로그인 상태입니다.
+- 로그인 성공·실패뿐 아니라 미로그인 직접 접근과 로그아웃 후 접근도 확인합니다.
+- JSP 스크립틀릿의 실행 위치는 서버입니다. 비밀번호 입력형·POST 자체는 암호화가 아닙니다.
+
+자기 점검: URL의 context path 설명 / 세 가지 인코딩 설정 구분 / redirect 후 request 속성 소실 설명 / 회원 화면 세션 검사 / HTML 이스케이프 이유.
+
+공식 참고: [Tomcat 10.1 설치](https://tomcat.apache.org/tomcat-10.1-doc/setup.html), [Jasper JSP 엔진](https://tomcat.apache.org/tomcat-10.1-doc/jasper-howto.html), [애플리케이션 배포](https://tomcat.apache.org/tomcat-10.1-doc/deployer-howto.html), [Servlet API](https://tomcat.apache.org/tomcat-10.1-doc/servletapi/index.html). Tomcat 10.1은 Java 11 이상과 Jakarta Servlet 6.0·Pages 3.1 계열을 사용하며 수업 기준 JDK는 21입니다.

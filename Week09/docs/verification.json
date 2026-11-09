@@ -1,0 +1,77 @@
+{
+  "runtime": "OpenJDK 21.0.13 / Apache Tomcat 10.1.61",
+  "checks": [
+    {
+      "case": "home",
+      "passed": true
+    },
+    {
+      "case": "unauth protected",
+      "passed": true
+    },
+    {
+      "case": "wrong password",
+      "passed": true
+    },
+    {
+      "case": "missing credentials",
+      "passed": true
+    },
+    {
+      "case": "valid login",
+      "passed": true
+    },
+    {
+      "case": "session id rotated",
+      "passed": true
+    },
+    {
+      "case": "dashboard and no-store",
+      "passed": true
+    },
+    {
+      "case": "invalid logout token",
+      "passed": true
+    },
+    {
+      "case": "logout",
+      "passed": true
+    },
+    {
+      "case": "protected after logout",
+      "passed": true
+    },
+    {
+      "case": "Korean form",
+      "passed": true
+    },
+    {
+      "case": "HTML escaped",
+      "passed": true
+    },
+    {
+      "case": "GET method loginAction.jsp",
+      "passed": true
+    },
+    {
+      "case": "GET method logout.jsp",
+      "passed": true
+    },
+    {
+      "case": "GET method examples/result.jsp",
+      "passed": true
+    },
+    {
+      "case": "WEB-INF inaccessible",
+      "passed": true
+    },
+    {
+      "case": "missing form rejected",
+      "passed": true
+    },
+    {
+      "case": "dynamic JSP",
+      "passed": true
+    }
+  ]
+}

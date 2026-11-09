@@ -1,0 +1,13 @@
+case,input,expected
+T01,GET index.jsp,200 홈 화면
+T02,GET dashboard.jsp without login,302 login.jsp
+T03,POST student / Java1234!,302 dashboard.jsp
+T04,POST student / wrong,302 login.jsp?error=1
+T05,POST empty credentials,302 login.jsp?error=1
+T06,POST name=홍길동 topic=JSP,200 한글 정상 출력
+T07,POST name=<script>alert(1)</script> topic=JSP,문자열 표시 스크립트 실행 없음
+T08,GET loginAction.jsp,405
+T09,POST logout with valid token then dashboard,302 login.jsp
+T10,POST logout with invalid token,403
+T11,GET WEB-INF/web.xml,404
+T12,POST result missing name,400
