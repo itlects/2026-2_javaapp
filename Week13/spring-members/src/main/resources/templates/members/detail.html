@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 상세</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>회원 상세정보</h1>
+    <dl>
+        <dt>번호</dt><dd th:text="${member.id}">1</dd>
+        <dt>이름</dt><dd th:text="${member.name}">김민수</dd>
+        <dt>이메일</dt><dd th:text="${member.email}">minsu@example.com</dd>
+    </dl>
+    <a th:href="@{/members}">목록으로</a>
+</main>
+</body>
+</html>

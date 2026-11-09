@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>회원 관리 · 목록</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <p class="eyebrow">JAVA APPLICATION / WEEK 13</p>
+    <h1>회원목록</h1>
+    <p>이름을 검색하고 회원 정보를 확인하세요.</p>
+    <form method="get" th:action="@{/members}">
+        <label for="keyword">회원 이름</label>
+        <input id="keyword" name="keyword" th:value="${keyword}"
+               placeholder="예: 김" maxlength="100">
+        <button type="submit">검색</button>
+        <a th:href="@{/members}">전체보기</a>
+    </form>
+    <p>조회 결과 <strong th:text="${count}">0</strong>명</p>
+    <table>
+        <caption>회원 조회 결과</caption>
+        <thead>
+        <tr><th scope="col">번호</th><th scope="col">이름</th>
+            <th scope="col">이메일</th><th scope="col">상세</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.id}">1</td>
+            <td th:text="${member.name}">김민수</td>
+            <td th:text="${member.email}">minsu@example.com</td>
+            <td><a th:href="@{/members/{id}(id=${member.id})}">상세보기</a></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(members)}">
+            <td colspan="4">검색 결과가 없습니다.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

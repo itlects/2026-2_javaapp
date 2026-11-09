@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring MVC 인사</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>Spring MVC 첫 화면</h1>
+    <p><span th:text="${name}">학습자</span>님, 안녕하세요.</p>
+    <a th:href="@{/members}">회원목록으로</a>
+</main>
+</body>
+</html>

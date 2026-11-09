@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    background: #f1f5f9;
+    color: #172536;
+    font: 16px/1.6 "Malgun Gothic", sans-serif;
+}
+main {
+    max-width: 960px;
+    margin: 48px auto;
+    padding: 32px;
+    background: white;
+    border-radius: 16px;
+}
+h1 { margin: 4px 0 12px; }
+.eyebrow { color: #16716b; font-weight: bold; }
+form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+input, button { padding: 10px; font: inherit; }
+button { background: #16716b; color: white; border: 0; border-radius: 6px; }
+a { color: #125d98; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+caption { text-align: left; margin-bottom: 10px; }
+th, td { padding: 14px; text-align: left; border-bottom: 1px solid #dce3eb; }
+th { background: #eaf3f3; }
+dt { font-weight: bold; }
+dd { margin: 0 0 16px; }
+@media (max-width: 640px) {
+    main { margin: 16px 8px; padding: 16px; overflow-x: auto; }
+}
