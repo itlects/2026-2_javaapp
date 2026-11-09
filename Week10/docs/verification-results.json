@@ -1,0 +1,92 @@
+[
+  {
+    "case": "T01 protected",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "login JSP compiled",
+    "passed": true,
+    "detail": "status=200"
+  },
+  {
+    "case": "T03 invalid password",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T02 login PRG",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "session id rotated",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "home JSP compiled",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T04 UTF8 GET",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T05 UTF8 POST",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T06 forward",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T07 redirect",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T10 CSRF",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T11 logout GET",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T12 direct JSP",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T14 escaped output",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T08 logout",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "T13 post logout access",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "portal JSP compiled",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "case": "portal missing DB configuration",
+    "passed": true,
+    "detail": ""
+  }
+]

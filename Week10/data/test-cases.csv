@@ -1,0 +1,15 @@
+id,case,input,expected
+T01,보호 화면 직접 접근,/home,로그인으로 302
+T02,정상 로그인,student / Java1234!,홈으로 302 후 환영문구
+T03,잘못된 비밀번호,student / wrong,로그인 화면에 오류와 200
+T04,한글 GET,/echo?name=홍길동,홍길동과 GET 표시
+T05,한글 POST,name=김학생,김학생과 POST 표시
+T06,Forward,/flow,URL 유지 및 요청에 저장한 값 표시
+T07,Redirect,/flow?mode=redirect,/echo로 URL 변경 및 방문자 표시
+T08,로그아웃,POST /logout,세션 무효화 후 로그인 이동
+T09,만료 후 보호 접근,20분 비활성 후 /home,로그인 이동
+T10,잘못된 CSRF,토큰 없이 POST /logout,403
+T11,GET 로그아웃,/logout,405
+T12,JSP 직접 접근,/WEB-INF/views/home.jsp,404
+T13,로그아웃 후 보호 URL 재요청,/home,로그인 이동
+T14,HTML 입력,/echo의 name에 <script>alert(1)</script>,문자 그대로 표시
