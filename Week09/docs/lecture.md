@@ -1,3 +1,68 @@
+## 공통 개발환경 — 실습 시작 전 확인
+
+이 강의의 개발환경은 다음 기준으로 통일합니다. 예제의 메뉴, 프로젝트 경로와 실행 방법은 Windows 10과 Eclipse 2025-09를 기준으로 설명합니다.
+
+| 구분 | 수업 기준 | 확인 항목 |
+|---|---|---|
+| 운영체제 | Windows 10 64비트 | 설정 → 시스템 → 정보 |
+| IDE | Eclipse IDE for Enterprise Java and Web Developers 2025-09 (2025.9) | Help → About Eclipse IDE |
+| Java | JDK 21 | java -version / javac -version |
+| 웹 실행 서버 | Apache Tomcat 10.1.x | Eclipse Runtime에 10.1 등록 |
+| DB 서버 | MySQL Community Server 8.0.46 | SELECT VERSION(); |
+| DB 관리 도구 | MySQL Workbench 8.0 계열 | Help → About MySQL Workbench |
+| 문자 인코딩 | UTF-8 | Eclipse Workspace·JSP 파일·응답 설정 |
+| 웹 프로젝트 | jsp-login | src/main/webapp / Context root: jsp-login |
+| 포트 | Tomcat 8080 / MySQL 3306 | 두 프로그램의 포트는 서로 다름 |
+
+### ① JDK와 Eclipse 설정
+
+1. JDK 21을 설치하고 JAVA_HOME을 JDK 설치 폴더로 지정합니다. 예: `C:\Java\jdk-21`. Path에 `%JAVA_HOME%\bin`을 추가하고 새 명령 프롬프트에서 아래를 확인합니다.
+
+```bat
+java -version
+javac -version
+echo %JAVA_HOME%
+```
+
+2. Eclipse **2025-09 Enterprise Java and Web Developers** 패키지를 사용합니다. 기존 Java Developers 패키지에서 Dynamic Web Project가 보이지 않으면 웹 개발 도구가 포함된 Enterprise 패키지를 사용합니다.
+3. Window → Preferences → Java → Installed JREs → Add → Standard VM에서 JDK 21 폴더를 등록하고 기본값으로 선택합니다. 프로젝트 Properties → Java Compiler의 Compiler compliance level도 21로 맞춥니다.
+4. Window → Preferences → General → Workspace → Text file encoding을 UTF-8로 지정합니다. JSP 파일 첫 줄의 pageEncoding과 contentType charset도 UTF-8을 유지합니다.
+
+### ② Tomcat 등록과 JSP 프로젝트 실행
+
+1. Tomcat 10.1.x Core ZIP을 압축 해제합니다. 예: `C:\tools\tomcat`. 해당 폴더 바로 아래에 bin, conf, webapps가 있어야 합니다.
+2. Eclipse의 Window → Preferences → Server → Runtime Environments → Add → Apache Tomcat v10.1에서 설치 폴더와 JDK 21을 지정합니다.
+3. File → New → Dynamic Web Project에서 Project name `jsp-login`, Target runtime Tomcat v10.1, Dynamic web module 6.0을 선택합니다. Next → Web Module에서 Content directory를 `src/main/webapp`으로 지정합니다.
+4. 제공한 `Week09/jsp-login` 폴더의 **내용물**을 프로젝트의 `src/main/webapp`에 복사합니다. 예: `src/main/webapp/login.jsp`, `src/main/webapp/WEB-INF/web.xml`. jsp-login 폴더를 한 겹 더 넣지 않습니다.
+5. 프로젝트 Properties → Web Project Settings → Context root를 `jsp-login`으로 맞춥니다. Properties → Targeted Runtimes에서 Tomcat 10.1이 선택되어 있는지도 확인합니다.
+6. Window → Show View → Other → Server → Servers로 Servers 뷰를 엽니다. 프로젝트 우클릭 → Run As → Run on Server → Tomcat v10.1을 선택합니다.
+7. 브라우저에서 `http://localhost:8080/jsp-login/`을 엽니다. 홈 → 로그인 → 회원 화면 → 로그아웃 순으로 확인합니다. 실습 계정은 `student / Java1234!`입니다.
+8. JSP 파일은 더블클릭하거나 Live Server로 실행하지 않습니다. Eclipse 서버를 사용할 때 별도 startup.bat로 Tomcat을 중복 실행하지 않습니다. 8080 포트가 사용 중이면 다른 Tomcat을 종료한 뒤 다시 실행합니다.
+
+### ③ MySQL과 Workbench 확인
+
+1. MySQL Community Server **8.0.46**과 MySQL Workbench **8.0 계열**을 사용합니다. Workbench는 관리·접속 프로그램이며 DB 서버와 별도로 실행됩니다.
+2. Windows의 서비스 앱에서 설치한 MySQL 서비스가 실행 중인지 확인합니다. 기본 서비스명은 보통 MySQL80이며 설치 시 지정한 이름을 사용합니다.
+3. Workbench의 MySQL Connections 옆 +에서 연결을 만듭니다. Connection Method: Standard (TCP/IP), Hostname: `127.0.0.1`, Port: `3306`, Username: 설치 시 설정한 계정. 비밀번호는 본인 설치값을 사용하고 교재 코드에 기록하지 않습니다.
+4. Test Connection 성공 후 SQL Editor에서 다음을 실행합니다. version이 8.0.46인지 확인합니다. Workbench의 버전은 Help → About에서 따로 확인합니다.
+
+```sql
+SELECT VERSION() AS server_version;
+SELECT @@port AS server_port;
+```
+
+**이번 9주차 예제는 고정 실습 계정으로 JSP·세션 흐름을 학습하므로 DB 연결·테이블 생성·JDBC JAR가 필요하지 않습니다.** MySQL은 공통 수업 환경으로 준비합니다. DB 연동 예제에서는 Connector/J 버전·배치 위치·SQL 초기화·접속 계정·JDBC URL을 해당 예제 앞에 별도로 명시합니다. Workbench 설치만으로 JSP에서 DB 연결이 되는 것은 아닙니다.
+
+### 실행 전 점검
+
+- JDK 21 / Tomcat 10.1 / Dynamic Web Module 6.0을 동일하게 지정했는가?
+- 소스 파일이 src/main/webapp 아래에 있고 컨텍스트가 jsp-login인가?
+- Tomcat 서버는 하나만 실행 중이며 http://localhost:8080/jsp-login/으로 접속했는가?
+- JSP는 UTF-8이며 Tomcat 9의 javax 예제와 Tomcat 10.1의 jakarta 예제를 혼용하지 않았는가?
+
+설치 참고: [Eclipse 2025-09 Enterprise 패키지](https://www.eclipse.org/downloads/packages/release/2025-09/r/eclipse-ide-enterprise-java-and-web-developers), [Tomcat 10.1 설치](https://tomcat.apache.org/tomcat-10.1-doc/setup.html), [Workbench 연결 설정](https://dev.mysql.com/doc/workbench/en/wb-getting-started-tutorial-create-connection.html).
+
+
 수업 주제: JSP 웹 개발환경 구축과 로그인 프로그램 구현. 사용자가 제시한 강의계획서 9주차 항목을 모두 반영했습니다. 별도 DB 설치 없이 WEB의 요청·응답 원리부터 로그인 상태 관리까지 연결합니다.
 
 | 목차 | 학습 내용 | 권장 시간 |
@@ -84,28 +149,11 @@ HTML의 head는 메타데이터, body는 화면 내용입니다. form의 action�
 
 ## 3. 예제
 
-### 준비 및 환경 구축 (Windows 10/11)
+### 실습 환경 및 실행 위치
 
-1. JDK 21을 설치합니다. 명령 프롬프트에서 `java -version`, `javac -version`을 실행하여 둘 다 21인지 확인합니다. JRE만 설치하면 `javac`가 없습니다.
-2. `JAVA_HOME`을 JDK 설치 폴더로 지정합니다. 예: `C:\Java\jdk-21`. `Path`에 `%JAVA_HOME%\bin`을 추가하고 새 명령 프롬프트를 엽니다. `echo %JAVA_HOME%`으로 확인합니다.
-3. [Apache Tomcat 10.1 다운로드](https://tomcat.apache.org/download-10.cgi)에서 10.1.x의 Core ZIP을 받아 `C:\tools`에 압축을 풉니다. 이 문서에서 `C:\tools\tomcat`은 압축을 푼 실제 Tomcat 폴더를 뜻합니다. 해당 폴더 바로 아래에 bin, conf, webapps가 있어야 합니다. 새 설치에는 제공되는 최신 보안 패치를 사용합니다.
-4. 명령 프롬프트에서 다음을 실행합니다. 콘솔을 닫지 않습니다.
+페이지 상단의 **공통 개발환경** 설정을 먼저 완료합니다. Windows 10 / Eclipse 2025-09에서 진행하며, 예제 경로는 웹 루트인 `src/main/webapp` 기준입니다. 제공 소스의 `jsp-login` 내용물을 이 위치에 복사하고 Run As → Run on Server로 실행합니다. 웹 루트에 examples와 WEB-INF/jspf 폴더를 만듭니다.
 
-```bat
-cd /d C:\tools\tomcat\bin
-catalina.bat run
-```
-
-5. 브라우저에서 `http://localhost:8080/`을 엽니다. Tomcat 환영 화면이 보이면 성공입니다. JSP는 파일을 더블클릭하거나 Live Server로 실행하지 않습니다.
-6. `webapps` 아래에 `jsp-login` 폴더를 만듭니다. 이 폴더명이 URL의 컨텍스트 경로 `/jsp-login`이 됩니다. 완성본을 쓰려면 제공된 `jsp-login` 폴더를 통째로 복사합니다. 직접 따라 하려면 빈 폴더에 아래 파일을 순서대로 만듭니다.
-7. 편집기는 VS Code 또는 Eclipse를 사용하며 모든 파일을 UTF-8로 저장합니다. 수정 후 저장하고 브라우저를 새로 고칩니다. web.xml 변경 후에는 Tomcat을 재시작합니다.
-8. 종료는 실행 콘솔에서 Ctrl+C를 누릅니다. Linux/macOS에서는 JDK 환경 설정 후 `bin/catalina.sh run`을 사용합니다.
-
-### Eclipse를 사용할 때의 대안
-
-Eclipse IDE for Enterprise Java and Web Developers를 설치합니다. Window → Preferences → Server → Runtime Environments → Add → Apache Tomcat v10.1에서 설치 폴더와 JDK 21을 지정합니다. File → New → Dynamic Web Project에서 프로젝트명 `jsp-login`, Target runtime Tomcat v10.1, Dynamic web module 6.0을 선택합니다. Next의 Web Module 화면에서 Content directory를 `src/main/webapp`으로 지정하고 web.xml 생성을 선택합니다. 제공 소스 `jsp-login`의 **내용물**을 `src/main/webapp`으로 복사합니다. 프로젝트 → Properties → Web Project Settings에서 Context root가 `jsp-login`인지 확인합니다. 프로젝트 우클릭 → Run As → Run on Server로 실행합니다.
-
-수동 배포와 Eclipse 배포는 둘 중 하나만 사용합니다. Eclipse Servers 편집기의 HTTP 포트가 8080인지 확인하세요. 선택 목록에 10.1이 없으면 Eclipse Web Tools를 업데이트합니다. Tomcat 9의 `javax.*` 예제와 Tomcat 10.1의 `jakarta.*` 코드를 섞지 않습니다.
+실행 URL: `http://localhost:8080/jsp-login/`. JSP를 파일로 직접 열지 않습니다. 이번 로그인 예제는 DB 없이 실행되며 MySQL은 공통 환경 준비 항목입니다.
 
 ### 예제 1 — 첫 동적 페이지
 
