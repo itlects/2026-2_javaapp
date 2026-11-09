@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS week16_helpdesk CHARACTER SET utf8mb4;
+USE week16_helpdesk;
+CREATE TABLE IF NOT EXISTS items (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(100) NOT NULL,
+  owner VARCHAR(60) NOT NULL,
+  status VARCHAR(20) NOT NULL,
+  CONSTRAINT chk_status CHECK (status IN ('접수','처리중','완료'))
+);
