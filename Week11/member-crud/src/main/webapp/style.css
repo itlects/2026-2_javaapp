@@ -1,0 +1,19 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #f1f5f9; color: #172b4d; font-family: "Malgun Gothic", sans-serif; }
+main { max-width: 1080px; margin: 60px auto; padding: 36px; background: white; border-radius: 18px; box-shadow: 0 12px 40px #17345612; }
+main.narrow { max-width: 600px; }
+.eyebrow { color: #267c80; font-size: 12px; letter-spacing: 2px; font-weight: bold; }
+h1 { font-size: 30px; }
+.toolbar, .actions { display: flex; align-items: center; gap: 12px; }
+.toolbar { margin: 30px 0; flex-wrap: wrap; }
+input { padding: 12px; border: 1px solid #b9c6d4; border-radius: 6px; font: inherit; }
+button, .button { padding: 11px 18px; border: 0; border-radius: 6px; background: #146b70; color: white; cursor: pointer; font: inherit; text-decoration: none; }
+a { color: #146b70; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 16px 12px; border-bottom: 1px solid #e2e8f0; }
+th { background: #f1f5f9; }
+label { display: block; margin: 24px 0; }
+label input { display: block; width: 100%; margin-top: 8px; }
+.danger { background: #fff1f2; color: #b4233a; padding: 6px 12px; }
+.error { color: #b4233a; }
+@media(max-width: 700px) { main { margin: 12px; padding: 18px; overflow-x: auto; } }

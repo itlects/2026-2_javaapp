@@ -1,0 +1,51 @@
+{
+  "runtime": "OpenJDK 21.0.13 / Tomcat 10.1.61 / Linux",
+  "java_compile": "passed (ECJ Java 21, Servlet API 6.0)",
+  "checks": [
+    {
+      "case": "등록 JSP 렌더링",
+      "passed": true
+    },
+    {
+      "case": "서버 입력검증 400",
+      "passed": true
+    },
+    {
+      "case": "입력 오류값 HTML 이스케이프",
+      "passed": true
+    },
+    {
+      "case": "CSRF 누락 403",
+      "passed": true
+    },
+    {
+      "case": "CSRF 변조 403",
+      "passed": true
+    },
+    {
+      "case": "GET 삭제 차단 400",
+      "passed": true
+    },
+    {
+      "case": "잘못된 id 400",
+      "passed": true
+    },
+    {
+      "case": "WEB-INF 직접 접근 차단",
+      "passed": true
+    },
+    {
+      "case": "지원하지 않는 action 400",
+      "passed": true
+    },
+    {
+      "case": "음수 id 400",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "MySQL 서버/Connector/J 부재: DB CRUD 미검증",
+    "Maven Central DNS 제한: Maven package 미완료",
+    "Windows 10/Eclipse UI 미검증"
+  ]
+}
