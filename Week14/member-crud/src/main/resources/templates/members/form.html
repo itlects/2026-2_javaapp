@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 입력</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<main>
+    <h1>회원 입력</h1>
+    <form method="post" th:action="${action}" th:object="${memberForm}">
+        <label for="name">이름</label>
+        <input id="name" th:field="*{name}" maxlength="50" required>
+        <p class="error" th:errors="*{name}"></p>
+        <label for="email">이메일</label>
+        <input id="email" type="email" th:field="*{email}" maxlength="120" required>
+        <p class="error" th:errors="*{email}"></p>
+        <label for="phone">전화번호</label>
+        <input id="phone" th:field="*{phone}" maxlength="20" required placeholder="010-1234-5678">
+        <p class="error" th:errors="*{phone}"></p>
+        <button type="submit">저장</button>
+        <a th:href="@{/members}">목록으로</a>
+    </form>
+</main>
+</body>
+</html>

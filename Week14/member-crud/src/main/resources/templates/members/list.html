@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>동원 회원관리</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<main>
+    <h1>동원 회원관리</h1>
+    <p>Spring과 MySQL로 만드는 회원 주소록</p>
+    <p class="notice" th:if="${message}" th:text="${message}"></p>
+    <a class="button" th:href="@{/members/new}">회원 등록</a>
+    <table>
+        <thead><tr><th>번호</th><th>이름</th><th>이메일</th><th>전화번호</th><th>관리</th></tr></thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(members)}"><td colspan="5">등록된 회원이 없습니다.</td></tr>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.id}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.email}"></td>
+            <td th:text="${member.phone}"></td>
+            <td>
+                <a th:href="@{/members/{id}/edit(id=${member.id})}">수정</a>
+                <form class="inline" method="post"
+                      th:action="@{/members/{id}/delete(id=${member.id})}"
+                      onsubmit="return confirm('이 회원을 삭제할까요?');">
+                    <button type="submit">삭제</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    background: #f3f6fb;
+    color: #17263e;
+    font: 16px/1.6 "Malgun Gothic", sans-serif;
+}
+main {
+    max-width: 1000px;
+    margin: 48px auto;
+    padding: 32px;
+    background: white;
+    border-radius: 16px;
+}
+table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+th, td { padding: 14px; border-bottom: 1px solid #d9e0eb; text-align: left; }
+th { background: #edf2fa; }
+label { display: block; margin-top: 16px; }
+input { display: block; width: 90%; padding: 12px; margin-bottom: 8px; }
+button, .button { background: #2155c9; color: white; padding: 8px 16px; border: 0; border-radius: 6px; cursor: pointer; }
+a { color: #2155c9; }
+a.button { display: inline-block; text-decoration: none; }
+.inline { display: inline; margin-left: 12px; }
+.error { color: #b42318; }
+.notice { background: #e6f5ec; padding: 12px; }
