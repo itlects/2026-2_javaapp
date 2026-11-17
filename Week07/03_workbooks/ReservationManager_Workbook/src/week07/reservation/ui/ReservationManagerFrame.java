@@ -62,7 +62,7 @@ public class ReservationManagerFrame extends JFrame {
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
 
-        JPanel panelTop = new JPanel(new BorderLayout(8, 8));
+        JPanel panelTop = new JPanel(new BorderLayout(8, 12));
         contentPane.add(panelTop, BorderLayout.NORTH);
 
         JPanel panelForm = new JPanel(new GridLayout(3, 4, 8, 8));
@@ -91,6 +91,7 @@ public class ReservationManagerFrame extends JFrame {
         panelForm.add(new JLabel(""));
 
         JPanel panelButton = new JPanel(new GridLayout(1, 5, 20, 0));
+        panelButton.setBorder(new EmptyBorder(4, 0, 8, 0));
         panelTop.add(panelButton, BorderLayout.SOUTH);
 
         JButton btnSearch = new JButton("조회");
@@ -103,6 +104,7 @@ public class ReservationManagerFrame extends JFrame {
         }
 
         JPanel panelList = new JPanel(new BorderLayout(0, 5));
+        panelList.setBorder(new EmptyBorder(4, 0, 0, 0));
         contentPane.add(panelList, BorderLayout.CENTER);
         panelList.add(new JLabel("예약목록"), BorderLayout.NORTH);
 
