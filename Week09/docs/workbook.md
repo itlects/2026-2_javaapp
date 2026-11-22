@@ -1,3 +1,21 @@
+### 9주차 프로젝트·실행 경로 통일
+
+9주차는 Eclipse Dynamic Web Project **w09**를 만들고 Context root도 **w09**로 지정합니다. 프로젝트명은 Windows 폴더명, Context root는 URL의 앱 경로에 대응합니다.
+
+| 항목 | 경로 |
+|---|---|
+| 프로젝트 | w09 |
+| 웹 루트 | w09/src/main/webapp |
+| 생명주기 예제 | w09/src/main/webapp/examples/lifecycle.jsp |
+| 실행 주소 | http://localhost:8080/w09/examples/lifecycle.jsp |
+
+1. 새 프로젝트: File → New → Dynamic Web Project → Project name: w09 → Tomcat 10.1 → Web Module 6.0 → Content directory: src/main/webapp.
+2. 기존 프로젝트: 이름을 w09로 변경한 후 Properties → Web Project Settings → Context root를 w09로 지정합니다. 이름만 변경해도 URL이 자동 변경된다고 가정하지 않습니다.
+3. Servers에서 기존 모듈을 Remove하고 w09를 Add합니다. 서버를 중지한 뒤 Clean/Publish하고 다시 실행합니다. 서버 편집기의 Modules에서 Path가 /w09인지 확인합니다.
+4. src/main/webapp 아래에 examples 폴더를 만들고 lifecycle.jsp 등을 저장합니다. 그 아래에 w09 폴더를 한 겹 더 만들지 않습니다.
+5. 주소는 **localhost:8080**입니다. loclahost는 호스트명 오타이며 80800은 사용할 수 없는 포트입니다.
+
+
 ## 공통 개발환경 — 실습 시작 전 확인
 
 이 강의의 개발환경은 다음 기준으로 통일합니다. 예제의 메뉴, 프로젝트 경로와 실행 방법은 Windows 10과 Eclipse 2025-09를 기준으로 설명합니다.
@@ -11,7 +29,7 @@
 | DB 서버 | MySQL Community Server 8.0.46 | SELECT VERSION(); |
 | DB 관리 도구 | MySQL Workbench 8.0 계열 | Help → About MySQL Workbench |
 | 문자 인코딩 | UTF-8 | Eclipse Workspace·JSP 파일·응답 설정 |
-| 웹 프로젝트 | jsp-login | src/main/webapp / Context root: jsp-login |
+| 웹 프로젝트 | w09 | src/main/webapp / Context root: w09 |
 | 포트 | Tomcat 8080 / MySQL 3306 | 두 프로그램의 포트는 서로 다름 |
 
 ### ① JDK와 Eclipse 설정
@@ -32,11 +50,11 @@ echo %JAVA_HOME%
 
 1. Tomcat 10.1.x Core ZIP을 압축 해제합니다. 예: `C:\tools\tomcat`. 해당 폴더 바로 아래에 bin, conf, webapps가 있어야 합니다.
 2. Eclipse의 Window → Preferences → Server → Runtime Environments → Add → Apache Tomcat v10.1에서 설치 폴더와 JDK 21을 지정합니다.
-3. File → New → Dynamic Web Project에서 Project name `jsp-login`, Target runtime Tomcat v10.1, Dynamic web module 6.0을 선택합니다. Next → Web Module에서 Content directory를 `src/main/webapp`으로 지정합니다.
-4. 제공한 `Week09/jsp-login` 폴더의 **내용물**을 프로젝트의 `src/main/webapp`에 복사합니다. 예: `src/main/webapp/login.jsp`, `src/main/webapp/WEB-INF/web.xml`. jsp-login 폴더를 한 겹 더 넣지 않습니다.
-5. 프로젝트 Properties → Web Project Settings → Context root를 `jsp-login`으로 맞춥니다. Properties → Targeted Runtimes에서 Tomcat 10.1이 선택되어 있는지도 확인합니다.
+3. File → New → Dynamic Web Project에서 Project name `w09`, Target runtime Tomcat v10.1, Dynamic web module 6.0을 선택합니다. Next → Web Module에서 Content directory를 `src/main/webapp`으로 지정합니다.
+4. 제공한 `Week09/w09` 폴더의 **내용물**을 프로젝트의 `src/main/webapp`에 복사합니다. 예: `src/main/webapp/login.jsp`, `src/main/webapp/WEB-INF/web.xml`. w09 폴더를 한 겹 더 넣지 않습니다.
+5. 프로젝트 Properties → Web Project Settings → Context root를 `w09`으로 맞춥니다. Properties → Targeted Runtimes에서 Tomcat 10.1이 선택되어 있는지도 확인합니다.
 6. Window → Show View → Other → Server → Servers로 Servers 뷰를 엽니다. 프로젝트 우클릭 → Run As → Run on Server → Tomcat v10.1을 선택합니다.
-7. 브라우저에서 `http://localhost:8080/jsp-login/`을 엽니다. 홈 → 로그인 → 회원 화면 → 로그아웃 순으로 확인합니다. 실습 계정은 `student / Java1234!`입니다.
+7. 브라우저에서 `http://localhost:8080/w09/`을 엽니다. 홈 → 로그인 → 회원 화면 → 로그아웃 순으로 확인합니다. 실습 계정은 `student / Java1234!`입니다.
 8. JSP 파일은 더블클릭하거나 Live Server로 실행하지 않습니다. Eclipse 서버를 사용할 때 별도 startup.bat로 Tomcat을 중복 실행하지 않습니다. 8080 포트가 사용 중이면 다른 Tomcat을 종료한 뒤 다시 실행합니다.
 
 ### ③ MySQL과 Workbench 확인
@@ -56,8 +74,8 @@ SELECT @@port AS server_port;
 ### 실행 전 점검
 
 - JDK 21 / Tomcat 10.1 / Dynamic Web Module 6.0을 동일하게 지정했는가?
-- 소스 파일이 src/main/webapp 아래에 있고 컨텍스트가 jsp-login인가?
-- Tomcat 서버는 하나만 실행 중이며 http://localhost:8080/jsp-login/으로 접속했는가?
+- 소스 파일이 src/main/webapp 아래에 있고 컨텍스트가 w09인가?
+- Tomcat 서버는 하나만 실행 중이며 http://localhost:8080/w09/으로 접속했는가?
 - JSP는 UTF-8이며 Tomcat 9의 javax 예제와 Tomcat 10.1의 jakarta 예제를 혼용하지 않았는가?
 
 설치 참고: [Eclipse 2025-09 Enterprise 패키지](https://www.eclipse.org/downloads/packages/release/2025-09/r/eclipse-ide-enterprise-java-and-web-developers), [Tomcat 10.1 설치](https://tomcat.apache.org/tomcat-10.1-doc/setup.html), [Workbench 연결 설정](https://dev.mysql.com/doc/workbench/en/wb-getting-started-tutorial-create-connection.html).
@@ -71,19 +89,19 @@ SELECT @@port AS server_port;
 
 | 화면 | 표시할 내용 | 확인 URL |
 |---|---|---|
-| 홈 | 제목·동적 페이지/폼/회원 페이지 링크 | /jsp-login/ |
-| 로그인 | 아이디·비밀번호·오류 메시지 | /jsp-login/login.jsp |
-| 회원 화면 | 환영 문구·학습 항목 표·로그아웃 | /jsp-login/dashboard.jsp |
+| 홈 | 제목·동적 페이지/폼/회원 페이지 링크 | /w09/ |
+| 로그인 | 아이디·비밀번호·오류 메시지 | /w09/login.jsp |
+| 회원 화면 | 환영 문구·학습 항목 표·로그아웃 | /w09/dashboard.jsp |
 
-처음에는 빈 폴더에 순서대로 작성합니다. 완성 소스는 `Week09/jsp-login`이며 비교·오류 수정에 사용합니다. 이 워크북은 DB 연결 전 단계입니다. 데이터는 `data/test-cases.csv`의 검증 입력을 사용합니다.
+처음에는 빈 폴더에 순서대로 작성합니다. 완성 소스는 `Week09/w09`이며 비교·오류 수정에 사용합니다. 이 워크북은 DB 연결 전 단계입니다. 데이터는 `data/test-cases.csv`의 검증 입력을 사용합니다.
 
 ## 단계 1. 서버와 폴더 준비
 
 ### 실습 환경 및 실행 위치
 
-페이지 상단의 **공통 개발환경** 설정을 먼저 완료합니다. Windows 10 / Eclipse 2025-09에서 진행하며, 예제 경로는 웹 루트인 `src/main/webapp` 기준입니다. 제공 소스의 `jsp-login` 내용물을 이 위치에 복사하고 Run As → Run on Server로 실행합니다. 웹 루트에 examples와 WEB-INF/jspf 폴더를 만듭니다.
+페이지 상단의 **공통 개발환경** 설정을 먼저 완료합니다. Windows 10 / Eclipse 2025-09에서 진행하며, 예제 경로는 웹 루트인 `src/main/webapp` 기준입니다. 제공 소스의 `w09` 내용물을 이 위치에 복사하고 Run As → Run on Server로 실행합니다. 웹 루트에 examples와 WEB-INF/jspf 폴더를 만듭니다.
 
-실행 URL: `http://localhost:8080/jsp-login/`. JSP를 파일로 직접 열지 않습니다. 이번 로그인 예제는 DB 없이 실행되며 MySQL은 공통 환경 준비 항목입니다.
+실행 URL: `http://localhost:8080/w09/`. JSP를 파일로 직접 열지 않습니다. 이번 로그인 예제는 DB 없이 실행되며 MySQL은 공통 환경 준비 항목입니다.
 
 다음 파일을 순서대로 작성합니다. 경로는 모두 Eclipse 프로젝트의 `src/main/webapp` 기준입니다. WEB-INF/jspf와 examples 하위 폴더를 먼저 만드세요. 각 단계의 파일은 전체 코드이므로 생략 없이 복사할 수 있습니다.
 
@@ -220,7 +238,7 @@ footer {
 
 파일: `index.jsp`
 
-/jsp-login/에 접속합니다. 처음에는 아직 만들지 않은 링크가 404가 될 수 있으므로 다음 단계까지 작성합니다.
+/w09/에 접속합니다. 처음에는 아직 만들지 않은 링크가 404가 될 수 있으므로 다음 단계까지 작성합니다.
 
 ```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -280,7 +298,7 @@ footer {
 
 파일: `login.jsp`
 
-/jsp-login/login.jsp에서 입력창과 버튼을 확인합니다. name=userId/password, action=loginAction.jsp, method=post를 찾아 표시합니다.
+/w09/login.jsp에서 입력창과 버튼을 확인합니다. name=userId/password, action=loginAction.jsp, method=post를 찾아 표시합니다.
 
 ```html
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -493,13 +511,13 @@ footer {
 
 학습 항목 2개를 dashboard 표에 추가하고 CSS의 주 색상을 바꿉니다. 고정 학습 데이터만 출력하므로 DB 작업은 필요 없습니다. 입력값을 추가 출력하려면 HTML 이스케이프를 적용해야 합니다. 인증·토큰 검사와 return을 제거하지 않습니다.
 
-보고서 템플릿에 환경 버전, 실제 URL, 기능 검증 결과, 화면 4장, 질문 답변, 변경 코드 설명을 기록합니다. 프로젝트 ZIP에는 jsp-login 폴더와 보고서만 넣고 Tomcat 전체·캐시·로그·실제 계정 정보는 넣지 않습니다. 제출 위치와 기한은 교수자 안내를 따릅니다.
+보고서 템플릿에 환경 버전, 실제 URL, 기능 검증 결과, 화면 4장, 질문 답변, 변경 코드 설명을 기록합니다. 프로젝트 ZIP에는 w09 폴더와 보고서만 넣고 Tomcat 전체·캐시·로그·실제 계정 정보는 넣지 않습니다. 제출 위치와 기한은 교수자 안내를 따릅니다.
 
 ## 오류 해결
 
 | 현상 | 확인·해결 순서 |
 |---|---|
-| 404 | Tomcat 시작 → 컨텍스트 jsp-login → 중첩 폴더 여부 → 파일명 대소문자 확인 |
+| 404 | Tomcat 시작 → 컨텍스트 w09 → 중첩 폴더 여부 → 파일명 대소문자 확인 |
 | 500 | 콘솔·logs의 첫 예외 확인 → JSP 행 번호 → 괄호·세미콜론·UTF-8 확인 |
 | 포트 사용 중 | 다른 Tomcat 종료 또는 conf/server.xml HTTP 포트 변경 후 URL도 변경 |
 | 한글 깨짐 | 파일 UTF-8·pageEncoding·contentType·매개변수 읽기 전 request 인코딩 확인 |
