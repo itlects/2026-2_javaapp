@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
+    <context-param>
+        <param-name>courseTitle</param-name>
+        <param-value>JAVA 응용 10주차</param-value>
+    </context-param>
+    <session-config>
+        <session-timeout>20</session-timeout>
+        <cookie-config><http-only>true</http-only></cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+</web-app>

@@ -16,3 +16,7 @@ Eclipse: Import → Maven → Existing Maven Projects → 둘 중 프로젝트 �
 교육 계정: student / Java1234!
 
 워크북 DB 환경변수·SQL 실행은 docs/workbook.md를 먼저 확인합니다. SHA-256 단독 해시는 수업용입니다. 회원가입·게시물 CRUD는 이번 구현 범위에 포함되지 않습니다.
+
+## JSP 기초 보충 학습
+
+[jsp-foundations](jsp-foundations/README.md): Actions·내장 객체·Client Request·HTTP 상태 코드·Form Processing의 이론과 전체 코드 실습. 기존 Servlet 로그인과 별도의 독립 프로젝트이며 DB가 필요하지 않습니다. [학습 시작](jsp-foundations/docs/index.md).

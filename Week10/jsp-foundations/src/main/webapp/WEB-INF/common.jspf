@@ -1,0 +1,15 @@
+<%@ page pageEncoding="UTF-8" %>
+<%!
+    // HTML 텍스트·따옴표로 감싼 속성 출력에 사용하는 교육용 함수입니다.
+    private String esc(Object value) {
+        if (value == null) {
+            return "(없음)";
+        }
+        return value.toString()
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
+%>
