@@ -1,0 +1,2 @@
+20a6cc37bc4797952ee37db158315e1f5c293957e4caa684674c79b36dd69d3a  Week10_Student_Examples.zip
+2fbdbe4c553e9b32b5d2c4c36190f714e70e6a3f200a0f27e722b3a4a8c29417  jsp-foundations.war

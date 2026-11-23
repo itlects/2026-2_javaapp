@@ -20,3 +20,7 @@ Eclipse: Import → Maven → Existing Maven Projects → 둘 중 프로젝트 �
 ## JSP 기초 보충 학습
 
 [jsp-foundations](jsp-foundations/README.md): Actions·내장 객체·Client Request·HTTP 상태 코드·Form Processing의 이론과 전체 코드 실습. 기존 Servlet 로그인과 별도의 독립 프로젝트이며 DB가 필요하지 않습니다. [학습 시작](jsp-foundations/docs/index.md).
+
+## Student Downloads / 학생용 다운로드
+
+[전체 프로젝트 ZIP과 바로 실행할 WAR 다운로드](downloads/README.md) · [학생 실행 안내](START_HERE_STUDENT.md)
