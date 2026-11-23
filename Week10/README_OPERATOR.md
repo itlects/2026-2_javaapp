@@ -1,6 +1,6 @@
 # 교수자·운영자 확인 순서
 
-1. docs/lecture.md 상단 환경을 설정하고 servlet-login을 먼저 실행합니다.
+1. docs/lecture.md 상단 환경을 설정하고 w10을 먼저 실행합니다.
 2. 교육계정 student / Java1234!로 로그인·실패·로그아웃을 시연합니다.
 3. /echo 및 /flow 두 모드의 Network·주소창·표시값 차이를 설명합니다.
 4. Workbench에서 data/setup.sql을 실행하고 learning-portal용 환경변수를 설정합니다.

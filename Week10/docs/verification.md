@@ -8,3 +8,5 @@
 - 워크북 화면 이미지는 JSP/CSS 구성을 바탕으로 그린 설계 예시이며 실제 브라우저 캡처가 아님. 두 프로젝트는 동일 JSP/CSS를 사용함.
 
 HTTP 세부 결과는 verification-results.json을 참조합니다. 실제 MySQL 검증을 대신하는 모의 DB 결과를 사용하지 않았습니다.
+
+기본 예제명을 w10으로 변경한 뒤 Java 21 컴파일과 /w10 컨텍스트의 로그인·로그아웃·한글 GET/POST·Forward/Redirect·보호 URL·출력 이스케이프 등 16개 HTTP 점검을 통과했습니다. Eclipse UI 자체는 이 환경에서 미검증입니다.

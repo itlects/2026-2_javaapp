@@ -26,10 +26,10 @@ echo %JAVA_HOME%
 
 2. Eclipse → Window → Preferences → Java → Installed JREs → Add → Standard VM에서 JDK 21을 등록합니다. General → Workspace → Text file encoding은 UTF-8입니다.
 3. Tomcat 10.1 Core ZIP을 압축 해제합니다. Preferences → Server → Runtime Environments → Add → Apache Tomcat v10.1에 설치 폴더와 JDK 21을 등록합니다.
-4. 완성본 사용: File → Import → Maven → Existing Maven Projects → `Week10/servlet-login`을 선택합니다. 프로젝트 우클릭 → Maven → Update Project를 실행합니다. 첫 실행에는 Maven 의존성 다운로드가 필요합니다.
-5. 직접 작성: File → New → Maven Project → Create a simple project 선택 → Group Id `edu.week10`, Artifact Id `servlet-login`, Packaging `war`, Version `1.0.0`. 아래 pom.xml 전체로 교체한 뒤 Maven → Update Project를 실행합니다. src/main/java와 src/main/webapp 폴더를 만듭니다.
-6. Properties → Project Facets에서 Java 21 / Dynamic Web Module 6.0, Targeted Runtimes에서 Tomcat v10.1을 확인합니다. Web Project Settings → Context root는 `servlet-login`입니다. Maven Dependencies가 Deployment Assembly의 WEB-INF/lib로 배포되어야 합니다.
-7. Run As → Run on Server → Tomcat v10.1 → Finish. `http://localhost:8080/servlet-login/login`에 접속합니다. JSP 파일을 직접 열거나 Live Server로 실행하지 않습니다. Eclipse 실행 중 별도 startup.bat로 같은 서버를 중복 실행하지 않습니다.
+4. 완성본 사용: File → Import → Maven → Existing Maven Projects → `Week10/w10`을 선택합니다. 프로젝트 우클릭 → Maven → Update Project를 실행합니다. 첫 실행에는 Maven 의존성 다운로드가 필요합니다.
+5. 직접 작성: File → New → Maven Project → Create a simple project 선택 → Group Id `edu.week10`, Artifact Id `w10`, Packaging `war`, Version `1.0.0`. 아래 pom.xml 전체로 교체한 뒤 Maven → Update Project를 실행합니다. src/main/java와 src/main/webapp 폴더를 만듭니다.
+6. Properties → Project Facets에서 Java 21 / Dynamic Web Module 6.0, Targeted Runtimes에서 Tomcat v10.1을 확인합니다. Web Project Settings → Context root는 `w10`입니다. Maven Dependencies가 Deployment Assembly의 WEB-INF/lib로 배포되어야 합니다.
+7. Run As → Run on Server → Tomcat v10.1 → Finish. `http://localhost:8080/w10/login`에 접속합니다. JSP 파일을 직접 열거나 Live Server로 실행하지 않습니다. Eclipse 실행 중 별도 startup.bat로 같은 서버를 중복 실행하지 않습니다.
 8. 워크북은 `learning-portal`을 별도 프로젝트로 Import하고 Context root도 `learning-portal`로 설정합니다. DB 환경변수를 설정한 후 Eclipse를 다시 실행합니다.
 
 ### 폴더와 URL을 구분하기

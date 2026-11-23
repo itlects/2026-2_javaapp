@@ -3,6 +3,7 @@
 | Download | Contents | Use |
 |---|---|---|
 | [Week10_Student_Examples.zip](https://github.com/itlects/2026-2_javaapp/raw/refs/heads/main/Week10/downloads/Week10_Student_Examples.zip) | All three projects, Korean/English notes, SQL, reports, START_HERE_STUDENT.md | Extract, then Eclipse → Import → Maven → Existing Maven Projects |
+| [w10.war](https://github.com/itlects/2026-2_javaapp/raw/refs/heads/main/Week10/downloads/w10.war) | Main Servlet/Session example with compiled classes and JSTL | Copy to Tomcat 10.1 webapps, then open /w10/login |
 | [jsp-foundations.war](https://github.com/itlects/2026-2_javaapp/raw/refs/heads/main/Week10/downloads/jsp-foundations.war) | Compiled JavaBean and JSP supplement | Copy to Tomcat 10.1 webapps, start server, open /jsp-foundations/index.jsp |
 | [SHA256SUMS.txt](SHA256SUMS.txt) | Download checksums | Optional integrity check |
 
@@ -25,3 +26,5 @@ WAR path: copy jsp-foundations.war to Tomcat webapps → bin/catalina.bat run �
 The English supplement retains Korean UI text for UTF-8 exercises. The packaged WAR passed 27 HTTP checks on OpenJDK 21/Tomcat 10.1.61/Linux. Windows/Eclipse UI and Maven packaging were not directly tested in that environment; the WAR was assembled from JSP resources and an ECJ-compiled JavaBean.
 
 학생은 ZIP을 압축 해제한 뒤 Maven 프로젝트로 가져오세요. 실행만 할 때는 WAR를 Tomcat webapps에 복사하세요. 자세한 프로젝트별 URL과 환경 설정은 [START_HERE_STUDENT.md](../START_HERE_STUDENT.md)에 있습니다.
+
+The main Eclipse project, Maven artifactId, WAR name, and Context root are `w10`. If an older servlet-login project is already imported, remove its old module from the Eclipse server and import the new w10 folder. The login URL is http://localhost:8080/w10/login and the demonstration credentials remain student / Java1234!. The renamed context passed 16 HTTP checks on OpenJDK 21/Tomcat 10.1.61.
