@@ -10,3 +10,7 @@
 HTTP 세부 결과는 verification-results.json을 참조합니다. 실제 MySQL 검증을 대신하는 모의 DB 결과를 사용하지 않았습니다.
 
 기본 예제명을 w10으로 변경한 뒤 Java 21 컴파일과 /w10 컨텍스트의 로그인·로그아웃·한글 GET/POST·Forward/Redirect·보호 URL·출력 이스케이프 등 16개 HTTP 점검을 통과했습니다. Eclipse UI 자체는 이 환경에서 미검증입니다.
+
+## 노션 본문 전체 코드 재구성 점검
+
+노션 본문에서 추출한 15개 파일로 JDK 21과 Maven 3.9.9 clean package를 수행하여 성공했습니다. 생성한 WAR의 Tomcat 실행 19개 항목이 통과했습니다. [상세 점검 결과](w10-notion-audit.md)를 확인하세요. Windows/Eclipse GUI 직접 검증과 DB 확장은 별도 범위입니다.

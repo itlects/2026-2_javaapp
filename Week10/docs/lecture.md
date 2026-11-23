@@ -29,7 +29,7 @@ echo %JAVA_HOME%
 4. 완성본 사용: File → Import → Maven → Existing Maven Projects → `Week10/w10`을 선택합니다. 프로젝트 우클릭 → Maven → Update Project를 실행합니다. 첫 실행에는 Maven 의존성 다운로드가 필요합니다.
 5. 직접 작성: File → New → Maven Project → Create a simple project 선택 → Group Id `edu.week10`, Artifact Id `w10`, Packaging `war`, Version `1.0.0`. 아래 pom.xml 전체로 교체한 뒤 Maven → Update Project를 실행합니다. src/main/java와 src/main/webapp 폴더를 만듭니다.
 6. Properties → Project Facets에서 Java 21 / Dynamic Web Module 6.0, Targeted Runtimes에서 Tomcat v10.1을 확인합니다. Web Project Settings → Context root는 `w10`입니다. Maven Dependencies가 Deployment Assembly의 WEB-INF/lib로 배포되어야 합니다.
-7. Run As → Run on Server → Tomcat v10.1 → Finish. `http://localhost:8080/w10/login`에 접속합니다. JSP 파일을 직접 열거나 Live Server로 실행하지 않습니다. Eclipse 실행 중 별도 startup.bat로 같은 서버를 중복 실행하지 않습니다.
+7. 직접 작성하는 경우 **3.0의 순서에 따라 파일 1~15를 모두 작성한 다음** Run As → Run on Server → Tomcat v10.1 → Finish. `http://localhost:8080/w10/login`에 접속합니다. JSP 파일을 직접 열거나 Live Server로 실행하지 않습니다. Eclipse 실행 중 별도 startup.bat로 같은 서버를 중복 실행하지 않습니다.
 8. 워크북은 `learning-portal`을 별도 프로젝트로 Import하고 Context root도 `learning-portal`로 설정합니다. DB 환경변수를 설정한 후 Eclipse를 다시 실행합니다.
 
 ### 폴더와 URL을 구분하기
@@ -132,6 +132,53 @@ flowchart TD
 
 ## 3. 예제
 
+### 3.0 w10을 처음부터 작성하는 순서
+
+**본강의 기본 프로젝트는 w10 하나이며 DB 없이 실행합니다.** 아래 파일 1~15를 모두 작성한 다음 서버를 실행하세요. learning-portal은 MySQL 확장 워크북, jsp-foundations는 JSP 보충 실습으로 별도 프로젝트입니다.
+
+1. File → New → Maven Project → Create a simple project를 선택합니다. Group Id는 `edu.week10`, Artifact Id와 프로젝트명은 `w10`, Version은 `1.0.0`, Packaging은 `war`로 설정합니다.
+2. 프로젝트 최상위의 `pom.xml`을 **파일 1의 전체 코드로 교체**하고 저장합니다. 프로젝트 우클릭 → Maven → Update Project를 실행합니다. 최초 실행에는 인터넷 연결과 Maven 의존성 다운로드가 필요합니다.
+3. `src/main/java`를 우클릭 → New → Package → `edu.week10`을 만듭니다. 이 패키지 안에 `Web`, `CommonFilter`, `EchoServlet`, `FlowServlet`, `AuthService`, `LoginServlet`, `HomeServlet`, `LogoutServlet`의 Java 클래스 **8개**를 만듭니다. 자동 생성된 코드는 각 파일의 전체 코드로 교체합니다. main 메서드는 만들지 않습니다.
+4. `src/main/webapp` 아래에 `WEB-INF` 폴더를 만들고 그 안에 `views` 폴더를 만듭니다. `web.xml`은 WEB-INF 바로 아래, `login.jsp`·`home.jsp`·`echo.jsp`는 views 안에 만듭니다. `index.jsp`와 `style.css`는 webapp 바로 아래에 만듭니다. JSP 마법사의 기본 HTML은 남겨 두고 덧붙이지 말고 **전체 코드로 교체**합니다.
+5. 파일 1~15를 모두 저장합니다. Java 파일 첫 줄은 `package edu.week10;`인지, JSP의 pageEncoding과 charset은 UTF-8인지 확인합니다. 아래 파일 경로는 모두 w10 프로젝트 루트 기준입니다.
+6. Maven → Update Project 후 Problems 뷰에서 오류를 해결합니다. Project Facets는 Java 21·Dynamic Web Module 6.0, Targeted Runtimes는 Tomcat 10.1, Web Project Settings의 Context root는 `w10`으로 확인합니다. Maven Dependencies가 Deployment Assembly의 WEB-INF/lib로 배포되는지도 확인합니다. JSTL JAR를 임의로 추가 복사하지 않습니다.
+7. 이전 이름의 프로젝트를 서버에 올렸다면 Servers 뷰 → 서버 우클릭 → Add and Remove에서 예전 모듈을 제거하고 w10을 추가합니다. Run As → Run on Server로 실행합니다. 컴파일이 끝나기 전에 브라우저를 먼저 열지 않습니다.
+8. `http://localhost:8080/w10/login`을 엽니다. `student / Java1234!`로 로그인하여 환영 화면을 확인합니다. 로그아웃 뒤 `/w10/home`을 새로 요청하면 로그인 화면으로 이동해야 합니다.
+
+| 작성 완료 확인 | 개수 |
+|---|---|
+| Java 클래스 | 8개 |
+| JSP | 4개 — index, login, home, echo |
+| XML | 2개 — pom.xml, web.xml |
+| CSS | 1개 |
+| 합계 | **15개 파일** |
+
+### 브라우저에서 그대로 입력할 실행 주소
+
+| 확인할 동작 | 전체 주소 또는 동작 | 기대 결과 |
+|---|---|---|
+| 첫 로그인 화면 | `http://localhost:8080/w10/login` | 로그인 폼 |
+| 시작 페이지 | `http://localhost:8080/w10/` | 로그인으로 이동 |
+| GET 한글 | `http://localhost:8080/w10/echo?name=홍길동` | GET과 홍길동 표시 |
+| POST 한글 | echo 화면의 POST 폼에서 김학생 전송 | POST와 김학생 표시 |
+| Forward | `http://localhost:8080/w10/flow` | 주소 유지, 요청에 저장한 값 표시 |
+| Redirect | `http://localhost:8080/w10/flow?mode=redirect` | /w10/echo로 이동, 방문자 표시 |
+| 보호 화면 | `http://localhost:8080/w10/home` | 로그인 전에는 로그인 이동, 로그인 후에는 환영 화면 |
+| 로그아웃 | home 화면의 로그아웃 버튼 | 로그인으로 이동, 이후 home 재접근 차단 |
+
+본문 코드의 `@WebServlet("/login")`·`"/home"`·`"/echo"` 같은 값은 **웹앱 내부 매핑**입니다. 여기에 /w10을 다시 붙여 수정하지 마세요. 브라우저가 요청하는 전체 경로에서만 Context root `/w10`이 앞에 붙으며, 코드의 getContextPath()가 이를 자동으로 처리합니다.
+
+### 복사 작성 중 오류가 나면
+
+- `c` 태그 또는 `jakarta.tags.core` 오류: Maven Update와 JSTL API·구현 두 의존성의 다운로드 및 배포를 확인합니다.
+- Servlet import 오류: Java 21, Tomcat 10.1과 `jakarta.servlet` 기준인지 확인합니다.
+- 404: 서버가 시작됐는지, w10 모듈을 추가했는지, URL이 /w10/login인지 확인합니다.
+- 로그인 POST 403: 주소로 login.jsp를 직접 열지 말고 /w10/login을 새로 열어 폼 토큰을 받은 뒤 다시 제출합니다.
+- WEB-INF의 JSP를 직접 요청했을 때 404: 정상입니다. /w10/login 또는 /w10/home의 Servlet URL을 사용합니다.
+- 이 기본 예제를 실행하는 데 MySQL 계정·테이블·JDBC 설정은 필요하지 않습니다.
+
+
+
 ### 예제 1. GET / POST와 한글 Parameter
 
 환경 설정 후 아래 전체 파일을 작성합니다. 먼저 /echo?name=홍길동을 열어 GET을 확인하고, 화면의 POST 폼에 김학생을 입력합니다. 결과에는 각각 이름과 메서드가 표시됩니다. 개발자 도구(F12) → Network에서 GET Query String과 POST Form Data를 비교합니다.
@@ -177,6 +224,7 @@ CSRF는 로그인·로그아웃 폼 요청의 출처 검증을 돕는 토큰입�
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.week10</groupId>
     <artifactId>w10</artifactId>
+    <name>w10</name>
     <version>1.0.0</version>
     <packaging>war</packaging>
     <properties>
