@@ -1,0 +1,75 @@
+{
+  "java": "OpenJDK 21",
+  "os": "Linux",
+  "port": 18080,
+  "checks": [
+    {
+      "check": "Login JSP and JSTL renders",
+      "passed": true
+    },
+    {
+      "check": "Anonymous home redirected",
+      "passed": true
+    },
+    {
+      "check": "Wrong password forward",
+      "passed": true
+    },
+    {
+      "check": "Missing CSRF rejected",
+      "passed": true
+    },
+    {
+      "check": "Login PRG",
+      "passed": true
+    },
+    {
+      "check": "Session ID rotated",
+      "passed": true
+    },
+    {
+      "check": "Authenticated home JSP",
+      "passed": true
+    },
+    {
+      "check": "Korean GET",
+      "passed": true
+    },
+    {
+      "check": "Korean POST",
+      "passed": true
+    },
+    {
+      "check": "Forward request attribute",
+      "passed": true
+    },
+    {
+      "check": "Redirect request attribute cleared",
+      "passed": true
+    },
+    {
+      "check": "CSS resource",
+      "passed": true
+    },
+    {
+      "check": "WEB-INF direct access blocked",
+      "passed": true
+    },
+    {
+      "check": "GET logout disallowed",
+      "passed": true
+    },
+    {
+      "check": "Logout redirect",
+      "passed": true
+    },
+    {
+      "check": "Logged out home blocked",
+      "passed": true
+    },
+    {
+      "check": "Ready message",
+      "passed": true
+    }
+  ]
+}
